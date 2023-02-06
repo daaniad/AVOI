@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 import http from "http";
-import app from "../../app/index.js"
+import app from "../index.js"
 
 /**
  * Get port from environment and store in Express.
