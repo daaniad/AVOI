@@ -1,5 +1,5 @@
 V 1 - Diseñar Views
-2 - Crear las views en VC (las de apartado 6) y que estén bien conectadas (con un h1 dentro para confirmar que funcionan)
+V 2 - Crear las views en VC (las de apartado 6) y que estén bien conectadas (con un h1 dentro para confirmar que funcionan)
 3 - Crear Header, Navbar y Footer con su CSS
 4 - Crear BBDD en función de los campos que se usan en Front-End
 5 - Crear Back-End en función de los campos que se usan en Front-End
