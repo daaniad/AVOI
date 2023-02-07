@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "my-vue-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,34 +11,21 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@mui/icons-material": "^5.11.0",
-    "@mui/material": "^5.11.7",
-    "formik": "2.2.9",
-    "i18next": "^22.4.9",
-    "i18next-browser-languagedetector": "^7.0.1",
-    "i18next-http-backend": "^2.1.1",
+    "@mui/material": "^5.11.1",
+    "axios": "^1.2.2",
+    "bootstrap": "^5.2.3",
+    "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "6.8.0",
-    "react-webcam": "7.0.1"
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.5.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
-    "@vitejs/plugin-react": "^3.1.0",
-    "vite": "^4.1.0"
-  },
-  "main": "vite.config.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/github.com/daaniad.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/github.com/daaniad/issues"
-  },
-  "homepage": "https://github.com/github.com/daaniad#readme",
-  "description": ""
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
+    "@vitejs/plugin-react": "^3.0.0",
+    "vite": "^4.0.0"
+  }
 }
