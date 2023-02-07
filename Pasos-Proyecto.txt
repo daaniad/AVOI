@@ -1,0 +1,27 @@
+V 1 - Diseñar Views
+V 2 - Crear las views en VC (las de apartado 6) y que estén bien conectadas (con un h1 dentro para confirmar que funcionan)
+3 - Crear Header, Navbar y Footer con su CSS
+4 - Crear BBDD en función de los campos que se usan en Front-End
+5 - Crear Back-End en función de los campos que se usan en Front-End
+6 - Añadir campos en las vistas para que conecten con el Back-End:
+	6.a - Registro;
+	6.b - Login;
+	6.c - Notice;
+	6.d - Shifts;
+	6.e - Attendance;
+	6.f - Manage (SuperAdmin);
+	6.g - Search;
+	6.h - Events;
+	6.i - Events/:id;
+	6.j - Events (SuperAdmin);
+
+
+
+Typography:
+- Roboto
+- Inter
+- Montserrat
+- Open Sans
+
+Doodle for the shitf organiser
+Coolors for colors palette
