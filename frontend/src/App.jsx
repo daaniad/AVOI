@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom"
+import {Routes, Route} from "react-router-dom"
 import Layout from "./components/Layout/Layout"
 import { ATTENDANCE, EVENTS, HOME, ID, LOGIN, MANAGE, MANAGE_EVENTS, NOTICE, SEARCH, SHIFT, SHITF_LABEL, SIGNIN } from "./const/homeMenu/homeMenu"
 import Attendance from "./views/Attendance"
@@ -17,7 +17,7 @@ import SignIn from "./views/SignIn"
 
 function App() {
   return (
-    <BrowserRouter>
+    
     <Routes>
       <Route path={HOME} element={<Layout/>}>
       <Route index element={<Home/>}/>
@@ -36,7 +36,7 @@ function App() {
       <Route path={MANAGE_EVENTS} element={<ManageEvents/>}/>
       </Route>
     </Routes>
-    </BrowserRouter>
+    
   )
 }
 
