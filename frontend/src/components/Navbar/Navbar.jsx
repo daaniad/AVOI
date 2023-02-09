@@ -19,8 +19,10 @@ import {
   SHIFT,
   SHITF_LABEL,
 } from "../../const/homeMenu/homeMenu";
+import { useCheckLoginContext } from "../../contexts/AuthContext/loginContext";
 import { Link } from "react-router-dom";
 export default function Navbar() {
+  const { logout, authorization } = useCheckLoginContext();
   return (
 <>
 <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -36,9 +38,6 @@ export default function Navbar() {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="btn-light btn-lg p-2 nav-item">
-          <Link className="nav-link active" aria-current="page" to={LOGIN}>{LOGIN_LABEL}</Link>
-        </li>
-        <li className="btn-light btn-lg p-2 nav-item">
           <Link className="nav-link active" aria-current="page" to={NOTICE}>{NOTICE_LABEL}</Link>
         </li>
         <li className="btn-light btn-lg p-2 nav-item dropdown">
@@ -50,7 +49,12 @@ export default function Navbar() {
             <li><Link className="dropdown-item" to={MANAGE}>{MANAGE_LABEL}</Link></li>
             <li><Link className="dropdown-item" to={MANAGE_EVENTS}>{MANAGE_EVENTS_LABEL}</Link></li>
             <li><hr className="dropdown-divider"/></li>
-            <li><a className="dropdown-item" href="#">Logout</a></li>
+            {authorization.email ? (
+
+              <button className="dropdown-item" onClick={logout}>Logout</button>
+            ): (
+              <Link className="dropdown-item" to={LOGIN}>Login</Link>
+            )}
           </ul>
         </li>
         

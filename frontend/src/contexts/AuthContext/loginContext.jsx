@@ -47,8 +47,8 @@ export function LogInContextProvider({ children }) {
     if (response.status === 200) {
       const userCredentials = await response.json();
       const userData = jwt_decode(userCredentials.jwt)
-      alert("Login")
       setAuthorization({...userData,token:userCredentials.jwt});
+      console.log(authorization)
       window.localStorage.setItem(MY_AUTH_APP, JSON.stringify({...userData,token:userCredentials.jwt}));
       setErrorMessage(null)
     } else {
@@ -69,8 +69,8 @@ export function LogInContextProvider({ children }) {
       if (response.status === 401) {
         throw "No autorizado";
       } else if (response.status === 200) {
-        alert(`User ${newUser.name} signed-in successfully`);
         setNewUser(initialUserState);
+        alert(`User ${newUser.name} signed-in successfully`);
       } else if (response.status === 409) {
         alert(`Usuario ya registrado`);
       }
