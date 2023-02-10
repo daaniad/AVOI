@@ -7,21 +7,11 @@ const CheckLogInContext = createContext({
     role: null,
   },
   login: () => {},
-  signIn: () => {},
   logout: () => {},
   errorMessage: "Error al introducir email o password",
 });
 
 export default CheckLogInContext;
-
-const initialUserState = {
-    email: "",
-    password: "",
-    name: "",
-    surname: "",
-    address: "",
-    pc: ""
-  };
 
 const MY_AUTH_APP = "MY_AUTH_APP";
 
@@ -33,7 +23,7 @@ export function LogInContextProvider({ children }) {
     }
   );
 
-  const [newUser, setNewUser] = useState(initialUserState);
+  
 
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -48,33 +38,12 @@ export function LogInContextProvider({ children }) {
       const userCredentials = await response.json();
       const userData = jwt_decode(userCredentials.jwt)
       setAuthorization({...userData,token:userCredentials.jwt});
-      console.log(authorization)
       window.localStorage.setItem(MY_AUTH_APP, JSON.stringify({...userData,token:userCredentials.jwt}));
       setErrorMessage(null)
     } else {
       
       setErrorMessage("Invalid user or password, try again");
     }
-  }
-
-  async function signIn(e, newUser) {
-    e.preventDefault();
-
-    fetch("http://localhost:3000/user", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newUser),
-    }).then((response) => {
-      console.log(response.status);
-      if (response.status === 401) {
-        throw "No autorizado";
-      } else if (response.status === 200) {
-        setNewUser(initialUserState);
-        alert(`User ${newUser.name} signed-in successfully`);
-      } else if (response.status === 409) {
-        alert(`Usuario ya registrado`);
-      }
-    });
   }
 
   function logout() {
@@ -89,7 +58,6 @@ export function LogInContextProvider({ children }) {
     authorization,
     errorMessage,
     login,
-    signIn,
     logout,
   };
 

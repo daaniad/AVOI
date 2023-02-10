@@ -25,8 +25,8 @@ import Notice from "./views/Notice";
 import Search from "./views/Search";
 import Shift from "./views/Shift";
 import SignIn from "./views/SignIn";
-import PublicRoute from "./components/router/PublicRoutes/PublicRoute";
-import PrivateRoute from "./components/router/PrivateRoute/PrivateRoute";
+import PublicRoute from "./components/routes/PublicRoutes/PublicRoute";
+import PrivateRoute from "./components/routes/PrivateRoute/PrivateRoute";
 import {ROLES} from "./const/homeMenu/roles"
 import Unauthorized from "./views/Unauthorized/Unauthorized"
 

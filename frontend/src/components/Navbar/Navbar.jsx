@@ -18,6 +18,8 @@ import {
   SEARCH_LABEL,
   SHIFT,
   SHITF_LABEL,
+  SIGIN_LABEL,
+  SIGNIN,
 } from "../../const/homeMenu/homeMenu";
 import { useCheckLoginContext } from "../../contexts/AuthContext/loginContext";
 import { Link } from "react-router-dom";
@@ -39,6 +41,9 @@ export default function Navbar() {
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="btn-light btn-lg p-2 nav-item">
           <Link className="nav-link active" aria-current="page" to={NOTICE}>{NOTICE_LABEL}</Link>
+        </li>
+        <li className="btn-light btn-lg p-2 nav-item">
+          <Link className="nav-link active" aria-current="page" to={SIGNIN}>{SIGIN_LABEL}</Link>
         </li>
         <li className="btn-light btn-lg p-2 nav-item dropdown">
           <span className="nav-link active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
