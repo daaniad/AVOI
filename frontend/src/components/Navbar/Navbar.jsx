@@ -45,6 +45,9 @@ export default function Navbar() {
         <li className="btn-light btn-lg p-2 nav-item">
           <Link className="nav-link active" aria-current="page" to={SIGNIN}>{SIGIN_LABEL}</Link>
         </li>
+        <li className="btn-light btn-lg p-2 nav-item">
+          <Link className="nav-link active" aria-current="page" to={EVENTS}>{EVENTS_LABEL}</Link>
+        </li>
         <li className="btn-light btn-lg p-2 nav-item dropdown">
           <span className="nav-link active" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {ADMIN_LABEL}

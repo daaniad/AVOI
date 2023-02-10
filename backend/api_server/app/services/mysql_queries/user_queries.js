@@ -43,4 +43,25 @@ userQueries.addUser = async (userData) => {
     }
 }
 
+userQueries.addDisp = async (dispData) => {
+    // Conectamos con la base de datos y añadimos el usuario.
+    let conn = null
+    try {
+        conn = await db.createConnection()
+        // Creamos un objeto con los datos del usuario a guardar en la base de datos.
+        // Encriptamos la password con md5 y usamos la libreria momentjs para registrar la fecha actual
+        console.log(dispData);
+        let dispObj = {
+           idSemana: dispData.diasSemana,
+           mañana: dispData.mañana,
+           idusuario: dispData.idusuario
+        }
+        return await db.query('INSERT INTO disponibilidad SET ?', dispObj, 'insert', conn)
+    } catch (e) {
+       throw new Error(e)
+    } finally {
+        conn && await conn.end();
+    }
+}
+
 export default userQueries

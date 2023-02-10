@@ -7,4 +7,6 @@ dao.addUser = async (userData) => await userQueries.addUser(userData);
 
 dao.getUserByEmail = async (email) => await userQueries.getUserByEmail(email);
 
+dao.addDisp= async (dispData) => await userQueries.addDisp(dispData);
+
 export default dao

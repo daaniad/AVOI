@@ -2,17 +2,21 @@ import EventsView from "./EventsView";
 import useFetch from "../../hooks/useFetch/useFetch";
 
 export default function Events() {
-
-const {response,error} = useFetch("https://rickandmortyapi.com/api/character",{
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(credentials),
-  });
-console.log(response)
-    return(
-        <EventsView events={response}/>
-    )
+    return <EventsView/>
 }
+
+
+
+// const {response,error} = useFetch("https://rickandmortyapi.com/api/character",{
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(credentials),
+//   });
+// console.log(response)
+//     return(
+//         <EventsView events={response}/>
+//     )
+
 
 /**
  * id   idUser   turno   idDiaSemana 

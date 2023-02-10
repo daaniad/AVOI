@@ -14,8 +14,12 @@ controller.addUser = async (req, res) => {
         const user = await dao.getUserByEmail(email);
         if (user.length > 0) return res.status(409).send(`User ${name} already registered`)
         const addUser = await dao.addUser(req.body);
-        if (addUser)
-        return res.send(`User ${name} with id: ${addUser} registered successfully`);
+        console.log(addUser);
+        if (addUser) {
+          await dao.addDisp({diasSemana:req.body.idSemana, mañana:req.body.mañana, idusuario: addUser})
+
+          return res.send(`User ${name} with id: ${addUser} registered successfully`);
+        }
     } catch(e) {
         console.log(e.message);
     }
