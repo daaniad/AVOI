@@ -1,6 +1,7 @@
 import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { LOGIN } from "../../../const/homeMenu/homeMenu"
-import { useCheckLoginContext } from "../../../contexts/AuthContext/logInContext";
+import {useCheckLoginContext} from "../../../contexts/AuthContext/loginContext"
+
 export default function PrivateRoute({allowedRoles}) {
   const { authorization } = useCheckLoginContext();
   const location = useLocation();

@@ -4,7 +4,7 @@ V 2 - Crear las views en VC (las de apartado 6) y que estén bien conectadas (co
 V 4 - Crear BBDD en función de los campos que se usan en Front-End
 5 - Crear Back-End en función de los campos que se usan en Front-End
 6 - Añadir campos en las vistas para que conecten con el Back-End:
-	6.a - Registro; V (funciona, pero por arreglar)
+	6.a - Registro; V
 	6.b - Login; V (funciona, pero por arreglar)
 	6.c - Notice;
 	6.d - Shifts;

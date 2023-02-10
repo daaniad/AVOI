@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useCheckLoginContext } from "../../contexts/AuthContext/loginContext";
 
-
 export default function LoginView() {
   const { login } = useCheckLoginContext();
   const [credentials, setCredentials] = useState({
@@ -18,11 +17,6 @@ export default function LoginView() {
 
     setCredentials(newCredentials);
   }
-
-  
-
-
-
   
 
   return (

@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import jwt_decode from "jwt-decode";
+import {MY_AUTH_APP} from '../../const/localStorageKey';
 
 const CheckLogInContext = createContext({
   authorization: {
@@ -13,16 +14,17 @@ const CheckLogInContext = createContext({
 
 export default CheckLogInContext;
 
-const MY_AUTH_APP = "MY_AUTH_APP";
+
 
 export function LogInContextProvider({ children }) {
+
+
   const [authorization, setAuthorization] = useState(JSON.parse(
     window.localStorage.getItem(MY_AUTH_APP)) ?? {
       email: null,
       role: null,
     }
   );
-
   
 
   const [errorMessage, setErrorMessage] = useState(null);

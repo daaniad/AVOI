@@ -1,4 +1,4 @@
-export default function EventsView() {
+export default function EventsView({events}) {
   return (
     <>
       <h1>Esto es Events</h1>

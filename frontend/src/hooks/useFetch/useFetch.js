@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function Fetch(url, options = {}) {
+export default function useFetch(url, options = {}) {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 
@@ -10,6 +10,7 @@ export default function Fetch(url, options = {}) {
         const response = await fetch(url, { ...options });
         const data = await response.json();
         setResponse(data);
+
       } catch (error) {
         setError(error);
       }
