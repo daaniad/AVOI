@@ -110,7 +110,7 @@ try{
     }
     };
 
-userQueries.validate = async (id, dispData) => {
+userQueries.validate = async (dispData) => {
     let conn = null;
   try {
     conn = await db.createConnection();
@@ -119,9 +119,10 @@ userQueries.validate = async (id, dispData) => {
     console.log(dispData);
     let dispObj = {
       validado: dispData.validado,
+      idturno: dispData.idturno,
     };
     return await db.query(
-      "UPDATE usuarios SET validado = 1 WHERE id = ?", id, dispObj,
+      "UPDATE usuarios SET ? WHERE id = ?", dispObj, dispData.id,
       "insert",
       conn
     );

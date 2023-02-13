@@ -9,7 +9,7 @@ const userRouter = express.Router();
 userRouter.post("/", userController.addUser);
 userRouter.post("/login", validateLoginDto, userController.userLogin);
 userRouter.get("/manage", userController.manageNewUser);
-userRouter.patch("/:id/validate", userController.validate);
+userRouter.patch("/validate/:id", userController.validate);
 
 
 
