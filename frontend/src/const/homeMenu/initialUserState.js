@@ -4,5 +4,7 @@ export const initialUserState = {
     name: "",
     surname: "",
     address:"",
-    pc:""
+    pc:"",
+    idSemana:"",
+    mañana:""
   };
