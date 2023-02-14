@@ -1,7 +1,22 @@
-export default function EventsView({events}) {
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import events from "../../const/events/events"
+
+// Importa los estilos CSS
+import "react-big-calendar/lib/css/react-big-calendar.css";
+export default function EventsView({}) {
+  const localizer = momentLocalizer(moment);
+  
   return (
     <>
       <h1>Esto es Events</h1>
+      <Calendar
+        localizer={localizer}
+        events={events}
+        startAccessor="start"
+        endAccessor="end"
+      />
+      
 
 
       {/* Futura tarjeta de evento para ir a evento detalle */}

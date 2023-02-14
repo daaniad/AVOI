@@ -1,4 +1,5 @@
 import userQueries from "./mysql_queries/user_queries.js";
+import productQueries from "./mysql_queries/product_queries.js";
 
 
 const dao = {};
@@ -12,5 +13,7 @@ dao.addDisp= async (dispData) => await userQueries.addDisp(dispData);
 dao.manageNewUser = async () => await userQueries.manageNewUser();
 
 dao.validate = async (id, dispData) => await userQueries.validate(id, dispData);
+
+
 
 export default dao
