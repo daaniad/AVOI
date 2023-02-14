@@ -66,6 +66,13 @@ controller.manageNewUser = async (req, res) => {
   let user = await dao.manageNewUser();
   try {
     if (user.length <= 0) return res.status(404).send("No Users to validate");
+    // const response = user.map((item) => {
+    //   return {
+    //     ...item,
+    //     idSemana: JSON.parse(item.idSemana),
+    //     mañana: JSON.parse(item.mañana)
+    //   }
+    // })
     return res.send(user);
   } catch (e) {
     console.log(e.message);

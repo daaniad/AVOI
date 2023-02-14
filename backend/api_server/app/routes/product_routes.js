@@ -2,7 +2,7 @@ import express from "express";
 import productController from "../controller/products_controller.js"
 const productRouter = express.Router();
 
-productRouter.post("/upload", productController.uploadImage);
+productRouter.post("/event", productController.addEvent);
 // Obtener imagen por su id
 productRouter.get("/image/:id", productController.getImage);
 productRouter.delete("/image/:id", productController.getImage)

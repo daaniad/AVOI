@@ -89,7 +89,7 @@ export default function SignInView() {
 
     {selects.map((select, index) => (
       <>
-      <select onChange={handleInput} value={newUser.idSemana} name="idSemana">
+      <select onChange={handleInput} value={newUser.idSemana} name={`idSemana-${index}`}>
             <option value="1">Lunes</option>
             <option value="2">Martes</option>
             <option value="3">Miércoles</option>
@@ -99,12 +99,12 @@ export default function SignInView() {
             <option value="7">Domingo</option>
           </select>
 
-        <select onChange={handleInput} value={newUser.mañana} name="mañana">
+        <select onChange={handleInput} value={newUser.mañana} name={`mañana-${index}`}>
           <option value="1">Mañana</option>
           <option value="0">Tarde</option>
         </select>
       </>
-    ))};
+    ))}
     <button onClick={handleAddInput}>Agregar campo</button>
         {/* <select onChange={handleInput} value={newUser.idSemana} name="idSemana">
           <option value="1">Lunes</option>

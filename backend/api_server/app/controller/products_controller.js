@@ -5,7 +5,8 @@ const __dirname = currentDir().__dirname;
 
 const controller = {};
 
-controller.uploadImage = async (req, res) => {
+controller.addEvent = async (req, res) => {
+  console.log(req.files);
     try {
       if (req.files === null) return;
       if (!req.files || Object.keys(req.files).length === 0) {
@@ -25,13 +26,14 @@ controller.uploadImage = async (req, res) => {
         image.mv(uploadPath, (err) => {
           if (err) return res.status(500).send(err);
         });
-        await dao.addImage({
-          name: image.name,
-          path: BBDDPath,
-          idproducto: req.query.idproducto,
+        await dao.addEvent({
+          titulo: req.body.titulo,
+          descripcion: req.body.descripcion,
+          fecha: req.body.fecha,
+          imagen: BBDDPath,
         });
       });
-      return res.send("Imagen subida!");
+      return res.send("Evento subido!");
     } catch (e) {
       console.log(e.message);
       return res.status(400).send(e.message);

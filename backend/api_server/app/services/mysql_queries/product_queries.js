@@ -3,7 +3,7 @@ import moment from "moment/moment.js";
 
 const productQueries = {};
 
-productQueries.addImage = async (imageData) => {
+productQueries.addEvent = async (eventData) => {
   // Conectamos con la base de datos y añadimos el usuario.
   let conn = null;
   try {
@@ -11,13 +11,16 @@ productQueries.addImage = async (imageData) => {
     // Creamos un objeto con los dats de la imagen a guardar en la base de datos.
     // Usamos la libreria momentjs para registrar la fecha actual
     let imageObj = {
-      nombreimg: imageData.name,
-      path: imageData.path,
-      fechaAlta: moment().format("YYYY-MM-DD HH:mm:ss"),
-      idproducto: imageData.idproducto
+      
+        titulo: eventData.titulo,
+        descripcion: eventData.descripcion,
+        fecha: eventData.fecha,
+        imagen: eventData.imagen,
+
+      
     };
     return await db.query(
-      "INSERT INTO imagenes SET ?",
+      "INSERT INTO eventos SET ?",
       imageObj,
       "insert",
       conn

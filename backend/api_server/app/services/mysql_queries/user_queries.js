@@ -79,13 +79,14 @@ userQueries.addDisp = async (dispData) => {
   }
 };
 
+// Query con array= json_arrayagg(disponibilidad.idSemana) as idSemana, json_arrayagg(disponibilidad.mañana) as mañana ...  group by disponibilidad.idusuario
 userQueries.manageNewUser = async () => {
   // Conectamos con la base de datos y buscamos si existe el usuario por el email.
   let conn = null;
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM usuarios JOIN disponibilidad on usuarios.id = disponibilidad.idusuario JOIN dias on disponibilidad.idSemana = dias.id WHERE usuarios.validado = 0", [],
+      "SELECT * FROM avoi.usuarios JOIN disponibilidad on usuarios.id = disponibilidad.idusuario JOIN dias on disponibilidad.idSemana = dias.id WHERE usuarios.validado = 0", [],
       "select",
       conn
     );

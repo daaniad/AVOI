@@ -15,5 +15,21 @@ dao.manageNewUser = async () => await userQueries.manageNewUser();
 dao.validate = async (id, dispData) => await userQueries.validate(id, dispData);
 
 
+dao.addEvent = async (eventData) => await productQueries.addEvent(eventData);
+
+//Obtener imagen por su id
+dao.getImageById = async (id) => await productQueries.getImageById(id);
+
+// Obtener producto por su referencia
+dao.getProductByRef = async (reference) => await productQueries.getProductByRef(reference);
+
+// Añadir producto
+dao.insertProduct = async (productData) => await productQueries.addProduct(productData);
+
+dao.getProduct = async () => await productQueries.getProduct();
+
+dao.getProductById = async (id) => await productQueries.getProductById(id);
+
+
 
 export default dao
