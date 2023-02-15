@@ -2,6 +2,21 @@ import { useState, useRef } from "react";
 import { initialUserState } from "../../const/homeMenu/initialUserState";
 import Input from "../../const/inputDays/input";
 
+const dayWeek = {
+  1: "Lunes",
+  2: "Martes",
+  3: "Miercoles",
+  4: "Jueves",
+  5: "Viernes",
+  6: "Sabado",
+  7: "Domingo",
+};
+
+const hour = {
+  1: "Mañana",
+  0: "Tarde",
+};
+
 export default function SignInView() {
   const [newUser, setNewUser] = useState(initialUserState);
   const [formValues, setFormValues] = useState([]);
@@ -36,11 +51,15 @@ export default function SignInView() {
 
   async function signIn(e) {
     e.preventDefault();
+    const user = {
+      ...newUser,
+      disponibility: formValues,
+    };
 
     fetch("http://localhost:3000/user", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newUser),
+      body: JSON.stringify(user),
     }).then((response) => {
       console.log(response.status);
       if (response.status === 401) {
@@ -109,34 +128,38 @@ export default function SignInView() {
           value={newUser.pc}
           onChange={handleInput}
         />
+        <ul>
+          {formValues.map((obj, index) => (
+            <div key={index}>
+              <li>
+                Dia de la semana: {dayWeek[obj.day]} en horario:{" "}
+                {hour[obj.hour]}
+              </li>
 
-        {formValues.map((obj, index) => (
-          <div key={index}>
-            <Input value={obj.day} index={index} label="Dia de la semana" />
-            <Input value={obj.hour} index={index} label="Horario" />
-            <button onClick={(e) => handleDeleteField(e, index)}>X</button>
-          </div>
-        ))}
+              <button onClick={(e) => handleDeleteField(e, index)}>X</button>
+            </div>
+          ))}
+        </ul>
         {!toggle ? (
           <div>
             <button onClick={addBtnClick}>Add New</button>
           </div>
         ) : (
           <div className="dialog-box">
-            <select ref={dayRef}>
+            <select ref={dayRef} name="idSemana">
               <option value="">Selecciona un dia de la semana</option>
-              <option value="1">Lunes</option>
-              <option value="2">Martes</option>
-              <option value="3">Miercoles</option>
-              <option value="4">Jueves</option>
-              <option value="5">Viernes</option>
-              <option value="6">Sabado</option>
-              <option value="7">Domingo</option>
+              <option value={1}>Lunes</option>
+              <option value={2}>Martes</option>
+              <option value={3}>Miercoles</option>
+              <option value={4}>Jueves</option>
+              <option value={5}>Viernes</option>
+              <option value={6}>Sabado</option>
+              <option value={7}>Domingo</option>
             </select>
-            <select ref={hourRef}>
+            <select ref={hourRef} name="mañana">
               <option value="">Selecciona un turno</option>
-              <option value="1">Mañana</option>
-              <option value="0">Tarde</option>
+              <option value={1}>Mañana</option>
+              <option value={0}>Tarde</option>
             </select>
             <button className="add-btn" onClick={handleAddField}>
               Add

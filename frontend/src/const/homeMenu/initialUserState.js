@@ -5,10 +5,6 @@ export const initialUserState = {
   surname: "",
   address: "",
   pc: "",
-  turno: [
-    {
-      idSemana: "",
-      mañana: "",
-    },
-  ],
+  idSemana: "",
+  mañana: "",
 };

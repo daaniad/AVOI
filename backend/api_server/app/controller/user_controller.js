@@ -5,7 +5,8 @@ import dao from "../services/dao.js";
 const controller = {};
 
 controller.addUser = async (req, res) => {
-  const { name, surname, email, password, address, pc } = req.body;
+  const { name, surname, email, password, address, pc, disponibility } =
+    req.body;
   if (!name || !surname || !email || !password || !address || !pc)
     return res.status(400).send("Body error");
 
@@ -15,17 +16,16 @@ controller.addUser = async (req, res) => {
       return res.status(409).send(`User ${name} already registered`);
     const addUser = await dao.addUser(req.body);
     console.log(addUser);
-    if (addUser) {
+
+    disponibility.map(async function (turn) {
       await dao.addDisp({
-        diasSemana: req.body.idSemana,
-        mañana: req.body.mañana,
+        diasSemana: Number(turn.day),
+        mañana: Number(turn.hour),
         idusuario: addUser,
       });
+    });
 
-      return res.send(
-        `User ${name} with id: ${addUser} registered successfully`
-      );
-    }
+    return res.send(`User ${name} with id: ${addUser} registered successfully`);
   } catch (e) {
     console.log(e.message);
   }
@@ -80,7 +80,6 @@ controller.manageNewUser = async (req, res) => {
 };
 
 controller.validate = async (req, res) => {
-  
   try {
     if (Object.entries(req.body).length === 0)
       return res.status(400).send("Body error");
@@ -89,6 +88,6 @@ controller.validate = async (req, res) => {
   } catch (e) {
     console.log(e.message);
   }
-}
+};
 
 export default controller;

@@ -1,25 +1,25 @@
 const dayWeek = {
-    1: "Lunes",
-    2: "Martes",
-    3: "Miercoles",
-    4: "Jueves",
-    5: "Viernes",
-    6: "Sabado",
-    7: "Domingo"
+    L: "Lunes",
+    M: "Martes",
+    X: "Miercoles",
+    J: "Jueves",
+    V: "Viernes",
+    S: "Sabado",
+    D: "Domingo"
   };
   
   const hour = {
-    0: "Mañana",
-    1: "Tarde"
+    1: "Mañana",
+    0: "Tarde"
   };
   
-  export default function Input({ value, label }) {
+  export default function Input({list}) {
     return (
-      <div className="input-group">
-        <label htmlFor={label}>{label}</label>
-        <div className="input">
-          <input type="text" value={dayWeek[value] || hour[value]} disabled />
-        </div>
-      </div>
+      <ul >
+        {list.map(item => (
+          <li>Dia de la semana: {dayWeek[item.day]} en horario: {hour[item.hour]}</li>
+
+        ))}
+      </ul>
     );
   }
