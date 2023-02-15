@@ -5,7 +5,7 @@ import dao from "../services/dao.js";
 const controller = {};
 
 controller.addUser = async (req, res) => {
-  const { name, surname, email, password, address, pc, disponibility } =
+  const { name, surname, email, password, address, pc, availability } =
     req.body;
   if (!name || !surname || !email || !password || !address || !pc)
     return res.status(400).send("Body error");
@@ -17,7 +17,7 @@ controller.addUser = async (req, res) => {
     const addUser = await dao.addUser(req.body);
     console.log(addUser);
 
-    disponibility.map(async function (turn) {
+    availability.map(async function (turn) {
       await dao.addDisp({
         diasSemana: Number(turn.day),
         mañana: Number(turn.hour),

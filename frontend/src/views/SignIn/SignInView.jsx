@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import { initialUserState } from "../../const/homeMenu/initialUserState";
-import Input from "../../const/inputDays/input";
 
 const dayWeek = {
   1: "Lunes",
@@ -53,7 +52,7 @@ export default function SignInView() {
     e.preventDefault();
     const user = {
       ...newUser,
-      disponibility: formValues,
+      availability: formValues,
     };
 
     fetch("http://localhost:3000/user", {
