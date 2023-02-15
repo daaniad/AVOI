@@ -1,5 +1,5 @@
 import userQueries from "./mysql_queries/user_queries.js";
-import productQueries from "./mysql_queries/product_queries.js";
+import eventQueries from "./mysql_queries/event_queries.js";
 
 
 const dao = {};
@@ -15,20 +15,20 @@ dao.manageNewUser = async () => await userQueries.manageNewUser();
 dao.validate = async (id, dispData) => await userQueries.validate(id, dispData);
 
 
-dao.addEvent = async (eventData) => await productQueries.addEvent(eventData);
+dao.addEvent = async (eventData) => await eventQueries.addEvent(eventData);
 
 //Obtener imagen por su id
-dao.getImageById = async (id) => await productQueries.getImageById(id);
+dao.getImageById = async (id) => await eventQueries.getImageById(id);
 
 // Obtener producto por su referencia
-dao.getProductByRef = async (reference) => await productQueries.getProductByRef(reference);
+dao.getProductByRef = async (reference) => await eventQueries.getProductByRef(reference);
 
 // Añadir producto
-dao.insertProduct = async (productData) => await productQueries.addProduct(productData);
+dao.insertProduct = async (productData) => await eventQueries.addProduct(productData);
 
-dao.getProduct = async () => await productQueries.getProduct();
+dao.getProduct = async () => await eventQueries.getProduct();
 
-dao.getProductById = async (id) => await productQueries.getProductById(id);
+dao.getProductById = async (id) => await eventQueries.getProductById(id);
 
 
 

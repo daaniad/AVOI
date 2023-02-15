@@ -1,9 +1,9 @@
 import db from "../mysql.js";
 import moment from "moment/moment.js";
 
-const productQueries = {};
+const eventQueries = {};
 
-productQueries.addEvent = async (eventData) => {
+eventQueries.addEvent = async (eventData) => {
   // Conectamos con la base de datos y añadimos el usuario.
   let conn = null;
   try {
@@ -32,7 +32,7 @@ productQueries.addEvent = async (eventData) => {
   }
 };
 
-productQueries.getImageById = async (id) => {
+eventQueries.getImageById = async (id) => {
   // Conectamos con la base de datos y buscamos si existe la imagen por su id.
   let conn = null;
   try {
@@ -50,7 +50,7 @@ productQueries.getImageById = async (id) => {
   }
 };
 
-productQueries.getProductById = async (id) => {
+eventQueries.getProductById = async (id) => {
   // Conectamos con la base de datos y buscamos si existe el producto por su id.
   let conn = null;
   try {
@@ -68,7 +68,7 @@ productQueries.getProductById = async (id) => {
   }
 };
 
-productQueries.deleteImage = async (id) => {
+eventQueries.deleteImage = async (id) => {
   // Conectamos con la base de datos y buscamos si existe la imagen por su id.
   let conn = null;
   try {
@@ -86,11 +86,11 @@ productQueries.deleteImage = async (id) => {
   }
 };
 
-productQueries.insertProduct = async (productData) => {
+eventQueries.insertProduct = async (productData) => {
  
 };
 
-productQueries.getProductByRef = async (reference) => {
+eventQueries.getProductByRef = async (reference) => {
      // Conectamos con la base de datos y buscamos si existe el usuario por el email.
   let conn = null;
   try {
@@ -108,7 +108,7 @@ productQueries.getProductByRef = async (reference) => {
   }
 }
 
-productQueries.addProduct = async (productData) => {
+eventQueries.addProduct = async (productData) => {
     let conn = null;
     try {
         conn = await db.createConnection();
@@ -131,7 +131,7 @@ productQueries.addProduct = async (productData) => {
     }
 }
 
-productQueries.getProduct = async () => {
+eventQueries.getProduct = async () => {
   // Conectamos con la base de datos y buscamos si existe la imagen por su id.
   let conn = null;
   try {
@@ -149,4 +149,4 @@ productQueries.getProduct = async () => {
   }
 };
 
-export default productQueries;
+export default eventQueries;

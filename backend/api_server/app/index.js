@@ -4,7 +4,7 @@ import logger from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import userRouter from "./routes/user_routes.js";
-import productRouter from "./routes/product_routes.js";
+import eventRouter from "./routes/event_routes.js";
 import fileUpload from "express-fileupload";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
@@ -44,6 +44,6 @@ app.use(
 
 app.use("/user", userRouter);
 
-app.use("/product", productRouter);
+app.use("/event", eventRouter);
 
 export default app;

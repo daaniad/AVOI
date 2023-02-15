@@ -1,9 +1,38 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { initialUserState } from "../../const/homeMenu/initialUserState";
+import Input from "../../const/inputDays/input";
 
 export default function SignInView() {
   const [newUser, setNewUser] = useState(initialUserState);
-  const [selects, setInputs] = useState([]);
+  const [formValues, setFormValues] = useState([]);
+  const [toggle, setToggle] = useState(false);
+
+  const dayRef = useRef();
+  const hourRef = useRef();
+
+  function handleAddField(e) {
+    e.preventDefault();
+    const values = [
+      ...formValues,
+      {
+        day: dayRef.current.value || "",
+        hour: hourRef.current.value || "",
+      },
+    ];
+    setFormValues(values);
+    setToggle(false);
+  }
+
+  function handleDeleteField(e, index) {
+    const values = [...formValues];
+    values.splice(index, 1);
+    setFormValues(values);
+  }
+
+  function addBtnClick(e) {
+    e.preventDefault();
+    setToggle(true);
+  }
 
   async function signIn(e) {
     e.preventDefault();
@@ -25,18 +54,12 @@ export default function SignInView() {
     });
   }
 
-
-  const handleAddInput = () => {
-    setInputs([...selects, ""]);
-  };
-  
-  
   function handleInput(event) {
     const newSignIn = {
       ...newUser,
       [event.target.name]: event.target.value,
     };
-    
+
     setNewUser(newSignIn);
   }
   return (
@@ -87,25 +110,40 @@ export default function SignInView() {
           onChange={handleInput}
         />
 
-    {selects.map((select, index) => (
-      <>
-      <select onChange={handleInput} value={newUser.idSemana} name={`idSemana-${index}`}>
-            <option value="1">Lunes</option>
-            <option value="2">Martes</option>
-            <option value="3">Miércoles</option>
-            <option value="4">Jueves</option>
-            <option value="5">Viernes</option>
-            <option value="6">Sábado</option>
-            <option value="7">Domingo</option>
-          </select>
+        {formValues.map((obj, index) => (
+          <div key={index}>
+            <Input value={obj.day} index={index} label="Dia de la semana" />
+            <Input value={obj.hour} index={index} label="Horario" />
+            <button onClick={(e) => handleDeleteField(e, index)}>X</button>
+          </div>
+        ))}
+        {!toggle ? (
+          <div>
+            <button onClick={addBtnClick}>Add New</button>
+          </div>
+        ) : (
+          <div className="dialog-box">
+            <select ref={dayRef}>
+              <option value="">Selecciona un dia de la semana</option>
+              <option value="1">Lunes</option>
+              <option value="2">Martes</option>
+              <option value="3">Miercoles</option>
+              <option value="4">Jueves</option>
+              <option value="5">Viernes</option>
+              <option value="6">Sabado</option>
+              <option value="7">Domingo</option>
+            </select>
+            <select ref={hourRef}>
+              <option value="">Selecciona un turno</option>
+              <option value="1">Mañana</option>
+              <option value="0">Tarde</option>
+            </select>
+            <button className="add-btn" onClick={handleAddField}>
+              Add
+            </button>
+          </div>
+        )}
 
-        <select onChange={handleInput} value={newUser.mañana} name={`mañana-${index}`}>
-          <option value="1">Mañana</option>
-          <option value="0">Tarde</option>
-        </select>
-      </>
-    ))}
-    <button onClick={handleAddInput}>Agregar campo</button>
         {/* <select onChange={handleInput} value={newUser.idSemana} name="idSemana">
           <option value="1">Lunes</option>
           <option value="2">Martes</option>
@@ -117,9 +155,6 @@ export default function SignInView() {
         </select> */}
 
         <button type="submit">Sign-In</button>
-
-       
-    
       </form>
     </>
   );
