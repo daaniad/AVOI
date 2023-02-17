@@ -63,19 +63,12 @@ controller.userLogin = async (req, res) => {
 };
 
 controller.manageNewUser = async (req, res) => {
-  let user = await dao.manageNewUser();
   try {
-    if (user.length <= 0) return res.status(404).send("No Users to validate");
-    // const response = user.map((item) => {
-    //   return {
-    //     ...item,
-    //     idSemana: JSON.parse(item.idSemana),
-    //     mañana: JSON.parse(item.mañana)
-    //   }
-    // })
-    return res.send(user);
+    return res.send(await dao.getUserToValidateAndShifts());
   } catch (e) {
     console.log(e.message);
+
+    return res.status(404).send("No Users to validate");
   }
 };
 
@@ -84,7 +77,8 @@ controller.validate = async (req, res) => {
     if (Object.entries(req.body).length === 0)
       return res.status(400).send("Body error");
     await dao.validate(req.params.id, req.body);
-    return res.send(`User with id ${req.params.id} has been validated`);
+
+    return res.send(await dao.getUserToValidateAndShifts());
   } catch (e) {
     console.log(e.message);
   }

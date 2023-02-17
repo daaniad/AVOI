@@ -1,36 +1,25 @@
-import { useState, useEffect } from "react";
-export default function ManageUsersView({ response }) {
+import { useState } from "react";
+
+const dayWeek = {
+  1: "Lunes",
+  2: "Martes",
+  3: "Miercoles",
+  4: "Jueves",
+  5: "Viernes",
+  6: "Sabado",
+  7: "Domingo",
+};
+
+const hour = {
+  1: "Mañana",
+  0: "Tarde",
+};
+export default function ManageUsersView({ response,onSubmit }) {
   const [validateDisp, setValidateDisp] = useState(null);
-  const [error, setError] = useState(null);
   const [userToShow, setUserToShow] = useState(false);
-  const updateUser = {
-    validate: 1,
-  };
-
-  async function fetchData() {
-    const response = await fetch(
-      `http://localhost:3000/user/validate/${response.id}`,
-      {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
-
-    fetchData();
-  }
 
   function handleSelect(event) {
-    const newValidation = {
-      ...validateDisp,
-      [event.target.name]: event.target.value,
-    };
-
-    setNewUser(newValidation);
+    setValidateDisp(event.target.value);
   }
 
   function handleToggle(e, user) {
@@ -59,20 +48,39 @@ export default function ManageUsersView({ response }) {
                   Show shifts
                 </button>
               </div>
-              {userToShow.idusuario === user.idusuario && (
+              {userToShow.id === user.id && (
                 <form
+                  onSubmit={(e) => onSubmit( e,user.id,validateDisp)}
                   onChange={handleSelect}
-                  value={updateUser.idturno}
+                  value={user.turnos}
                   className="d-flex"
                 >
-                  <li key={user.id} className="list-group-item">
-                    {userToShow.diasSemana}
+                  <fieldset id="turnos">
+                    <legend>Select a maintenance drone:</legend>
+                    {user.turnos.map((shift) => (
+                      <div>
+                        <input
+                          type="radio"
+                          id={shift.idDisponibilidad}
+                          name="turnos"
+                          value={shift.idDisponibilidad}
+                        />
+                        <label htmlFor={shift.idDisponibilidad}>
+                          {dayWeek[shift.idSemana]} en el turno de{" "}
+                          {hour[shift.mañana]}
+                        </label>
+                      </div>
+                    ))}
+                  </fieldset>
+
+                  {/* <li key={user.id} className="list-group-item">
+                    {userToShow.turnos}
                   </li>
                   <li key={user.id} className="list-group-item">
                     {userToShow.mañana}
-                  </li>
+                  </li> */}
                   <button
-                    type="button"
+                    type="submit"
                     className="btn btn-primary btn-sm d-flex justify-content-center"
                   >
                     Validate shift

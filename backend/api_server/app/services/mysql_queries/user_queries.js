@@ -86,7 +86,42 @@ userQueries.manageNewUser = async () => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM avoi.usuarios JOIN disponibilidad on usuarios.id = disponibilidad.idusuario JOIN dias on disponibilidad.idSemana = dias.id WHERE usuarios.validado = 0", [],
+      "SELECT usuarios.id, usuarios.nombre, usuarios.apellidos, dias.diasSemana, disponibilidad.mañana, disponibilidad.id as idDisponibilidad FROM avoi.usuarios JOIN disponibilidad on usuarios.id = disponibilidad.idusuario JOIN dias on disponibilidad.idSemana = dias.id WHERE usuarios.validado = 0",
+      [],
+      "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
+userQueries.getUserToValidate = async () => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "SELECT usuarios.id, usuarios.nombre, usuarios.apellidos FROM usuarios WHERE validado = 0",
+      [],
+      "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
+userQueries.getUserShift = async () => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "SELECT usuarios.id, disponibilidad.idSemana, disponibilidad.mañana, disponibilidad.id as idDisponibilidad FROM usuarios JOIN disponibilidad on usuarios.id = disponibilidad.idusuario",
+      [],
       "select",
       conn
     );
@@ -98,33 +133,15 @@ userQueries.manageNewUser = async () => {
 };
 
 userQueries.getUserById = async (id) => {
-    // Conectamos con la base de datos y buscamos si existe el usuario por el email.
-    let conn = null
-try{
-    conn = await db.createConnection();
-    console.log(id);
-    return await db.query('SELECT * FROM usuarios WHERE id = ?', id, 'select', conn)
-} catch (e) {
-    throw new Error(e)
-} finally {
-    conn && await conn.end();
-    }
-    };
-
-userQueries.validate = async (dispData) => {
-    let conn = null;
+  // Conectamos con la base de datos y buscamos si existe el usuario por el email.
+  let conn = null;
   try {
     conn = await db.createConnection();
-    // Creamos un objeto con los datos del usuario a guardar en la base de datos.
-    // Encriptamos la password con md5 y usamos la libreria momentjs para registrar la fecha actual
-    console.log(dispData);
-    let dispObj = {
-      validado: dispData.validado,
-      idturno: dispData.idturno,
-    };
+    console.log(id);
     return await db.query(
-      "UPDATE usuarios SET ? WHERE id = ?", dispObj, dispData.id,
-      "insert",
+      "SELECT * FROM usuarios WHERE id = ?",
+      id,
+      "select",
       conn
     );
   } catch (e) {
@@ -132,6 +149,31 @@ userQueries.validate = async (dispData) => {
   } finally {
     conn && (await conn.end());
   }
-}
+};
+
+userQueries.validate = async (id, dispData) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    // Creamos un objeto con los datos del usuario a guardar en la base de datos.
+    // Encriptamos la password con md5 y usamos la libreria momentjs para registrar la fecha actual
+    console.log(dispData);
+    let dispObj = {
+      validado: 1,
+      idturno: dispData.idturno,
+    };
+    return await db.query(
+      "UPDATE usuarios SET ? WHERE id = ?",
+      [dispObj,
+      id],
+      "update",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
 
 export default userQueries;
