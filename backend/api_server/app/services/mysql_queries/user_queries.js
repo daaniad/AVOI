@@ -176,4 +176,21 @@ userQueries.validate = async (id, dispData) => {
   }
 };
 
+userQueries.usersByShift = async (id) => {
+  let conn = null;
+  try{
+    conn = await GridFSBucket.createConnection();
+    return await db.query(
+      "SELECT usuarios.nombre, usuarios.apellidos, usuarios.idturno FROM usuarios JOIN disponibilidad on usuarios.id = disponibilidad.idusuario JOIN dias on disponibilidad.idSemana = dias.id WHERE (dias.responsable = 2);",
+      id,
+      "select",
+      conn
+    );
+  } catch(e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+}
+
 export default userQueries;
