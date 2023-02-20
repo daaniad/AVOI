@@ -22,9 +22,12 @@ import {
   SIGNIN,
 } from "../../const/homeMenu/homeMenu";
 import { useCheckLoginContext } from "../../contexts/AuthContext/loginContext";
+import useFetch from "../../hooks/useFetch/useFetch";
 import { Link } from "react-router-dom";
 export default function Navbar() {
+  const {response, error} = useFetch()
   const { logout, authorization } = useCheckLoginContext();
+  console.log(authorization.id);
   return (
 <>
 <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -54,6 +57,7 @@ export default function Navbar() {
           </span>
           <ul className="dropdown-menu">
             <li><Link className="dropdown-item" to={SEARCH}>{SEARCH_LABEL}</Link></li>
+            <li><Link className="dropdown-item" to={`shift/${authorization.id}`}>{SHITF_LABEL}</Link></li>
             <li><Link className="dropdown-item" to={MANAGE}>{MANAGE_LABEL}</Link></li>
             <li><Link className="dropdown-item" to={MANAGE_EVENTS}>{MANAGE_EVENTS_LABEL}</Link></li>
             <li><hr className="dropdown-divider"/></li>

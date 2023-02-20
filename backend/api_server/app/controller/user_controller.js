@@ -84,4 +84,18 @@ controller.validate = async (req, res) => {
   }
 };
 
+controller.getShiftList = async (req, res) => {
+  const { authorization } = req.headers;
+  console.log(authorization.id);
+  if (!authorization) {
+    return res.sendStatus(401);
+  }
+  try {
+    const user = await dao.getShiftList(authorization.id);
+    return res.send(user);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 export default controller;

@@ -6,6 +6,7 @@ const CheckLogInContext = createContext({
   authorization: {
     email: null,
     role: null,
+    id: null
   },
   login: () => {},
   logout: () => {},
@@ -23,6 +24,7 @@ export function LogInContextProvider({ children }) {
     window.localStorage.getItem(MY_AUTH_APP)) ?? {
       email: null,
       role: null,
+      id: null
     }
   );
   
@@ -53,6 +55,7 @@ export function LogInContextProvider({ children }) {
     setAuthorization({
       email: null,
       role: null,
+      id: null
     });
   }
 

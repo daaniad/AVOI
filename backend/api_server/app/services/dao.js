@@ -3,6 +3,8 @@ import eventQueries from "./mysql_queries/event_queries.js";
 
 const dao = {};
 
+// user queries daos'
+
 dao.addUser = async (userData) => await userQueries.addUser(userData);
 
 dao.getUserByEmail = async (email) => await userQueries.getUserByEmail(email);
@@ -28,6 +30,11 @@ dao.getUserToValidateAndShifts = async () => {
     };
   });
 };
+
+dao.getShiftList = async (id) => await userQueries.getShiftList(id); 
+
+
+// events queries daos'
 
 dao.validate = async (id, dispData) => await userQueries.validate(id, dispData);
 

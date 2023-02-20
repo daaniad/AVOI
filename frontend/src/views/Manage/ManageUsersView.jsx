@@ -73,12 +73,6 @@ export default function ManageUsersView({ response,onSubmit }) {
                     ))}
                   </fieldset>
 
-                  {/* <li key={user.id} className="list-group-item">
-                    {userToShow.turnos}
-                  </li>
-                  <li key={user.id} className="list-group-item">
-                    {userToShow.mañana}
-                  </li> */}
                   <button
                     type="submit"
                     className="btn btn-primary btn-sm d-flex justify-content-center"
