@@ -46,7 +46,7 @@ function App() {
         <Route element={<PrivateRoute allowedRoles={[ROLES.Admin]}/>}>
           <Route path={NOTICE} element={<Notice />} />
         </Route>
-        <Route path={SHIFT} element={<Shift />} />
+        <Route path="shift/:id" element={<Shift />} />
         <Route path={ATTENDANCE} element={<Attendance />} />
         <Route path={EVENTS} element={<Events />} />
         <Route path={EVENTS}>

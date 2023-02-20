@@ -85,13 +85,41 @@ controller.validate = async (req, res) => {
 };
 
 controller.getShiftList = async (req, res) => {
-  const { authorization } = req.headers;
-  console.log(authorization.id);
-  if (!authorization) {
-    return res.sendStatus(401);
-  }
+  const { id } = req.params;
+  console.log(id);
+
   try {
-    const user = await dao.getShiftList(authorization.id);
+    const user = await dao.getUserByShift(id);
+    return res.send(user);
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+controller.saveAssistance = async (req, res) => {
+
+  const {idusuarios} = req.body
+  try{
+  const date = await dao.fetchUserDate(idusuarios);
+
+  if (date.length>0) {
+    return res.status(409).send();
+  }
+  
+    const assistance = await dao.saveAssistance(req.body)
+    if (assistance) {
+     return res.send("Assistance saved successfully")
+    }
+  } catch(e) {
+    console.log(e.message);
+  }
+}
+
+controller.getUsers = async (req, res) => {
+ 
+  try {
+
+    const user = await dao.getUsers();
     return res.send(user);
   } catch (e) {
     console.log(e.message);

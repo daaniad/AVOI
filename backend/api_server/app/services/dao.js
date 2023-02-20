@@ -59,4 +59,12 @@ dao.getUserToValidate = async () => await userQueries.getUserToValidate();
 
 dao.getUserShift = async () => await userQueries.getUserShift();
 
+dao.getUserByShift = async (id) => await userQueries.usersByShift(id);
+
+dao.saveAssistance = async (assistData) => await userQueries.saveAssistance(assistData);
+
+dao.fetchUserDate = async(id) => await userQueries.fetchUserDate(id);
+
+dao.getUsers = async () => await userQueries.getUsers();
+
 export default dao;

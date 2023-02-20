@@ -164,8 +164,7 @@ userQueries.validate = async (id, dispData) => {
     };
     return await db.query(
       "UPDATE usuarios SET ? WHERE id = ?",
-      [dispObj,
-      id],
+      [dispObj, id],
       "update",
       conn
     );
@@ -176,21 +175,76 @@ userQueries.validate = async (id, dispData) => {
   }
 };
 
-userQueries.getShiftList = async (id) => {
+userQueries.usersByShift = async (id) => {
+  // Trae usuarios del turno del responsable
   let conn = null;
-  try{
+  try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT usuarios.nombre, usuarios.apellidos, usuarios.idturno FROM usuarios JOIN disponibilidad on usuarios.id = disponibilidad.idusuario JOIN dias on disponibilidad.idSemana = dias.id WHERE dias.responsable = ?",
+      "SELECT usuarios.id, usuarios.nombre, usuarios.apellidos, usuarios.idturno FROM usuarios JOIN disponibilidad on usuarios.id = disponibilidad.idusuario JOIN dias on disponibilidad.idSemana = dias.id WHERE dias.responsable = ?",
       id,
       "select",
       conn
     );
-  } catch(e) {
+  } catch (e) {
     throw new Error(e);
   } finally {
     conn && (await conn.end());
   }
-}
+};
+
+userQueries.getUsers = async () => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "SELECT usuarios.id, usuarios.nombre, usuarios.apellidos FROM usuarios WHERE role = 1",
+      [],
+      "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
+userQueries.saveAssistance = async (assistData) => {
+  let conn = null;
+
+  let assistObj = {
+    idusuarios: assistData.idusuarios,
+    fAsist: moment().format("YYYY-MM-DD"),
+  };
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "INSERT INTO asistencia SET ?",
+      assistObj,
+      "insert",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
+userQueries.fetchUserDate = async (id) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "SELECT fAsist from asistencia WHERE idusuarios = ?",
+      id,
+      "select",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  }
+};
 
 export default userQueries;

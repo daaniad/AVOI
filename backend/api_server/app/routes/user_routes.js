@@ -10,8 +10,9 @@ userRouter.post("/", userController.addUser);
 userRouter.post("/login", validateLoginDto, userController.userLogin);
 userRouter.get("/manage", userController.manageNewUser);
 userRouter.patch("/validate/:id", userController.validate);
-userRouter.get("/shift_list", userController.getShiftList);
-userRouter.get("/id", userController.getUserById);
+userRouter.get("/shift/:id", userController.getShiftList);
+userRouter.get("/users", userController.getUsers);
+userRouter.post("/assistance", userController.saveAssistance);
 
 
 
