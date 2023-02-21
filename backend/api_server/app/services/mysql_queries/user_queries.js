@@ -181,7 +181,7 @@ userQueries.usersByShift = async (id) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT usuarios.id, usuarios.nombre, usuarios.apellidos, usuarios.idturno FROM usuarios JOIN disponibilidad on usuarios.id = disponibilidad.idusuario JOIN dias on disponibilidad.idSemana = dias.id WHERE dias.responsable = ?",
+      "SELECT usuarios.id, usuarios.nombre, usuarios.apellidos, usuarios.idturno, asistencia.fAsist FROM usuarios JOIN asistencia on usuarios.id = asistencia.idusuarios JOIN disponibilidad on asistencia.idusuarios = disponibilidad.idusuario JOIN dias on disponibilidad.idSemana = dias.id WHERE dias.responsable = ?",
       id,
       "select",
       conn

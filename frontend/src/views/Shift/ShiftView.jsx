@@ -2,7 +2,8 @@ import useFetch from "../../hooks/useFetch/useFetch";
 import { useCheckLoginContext } from "../../contexts/AuthContext/loginContext";
 import { useEffect, useState } from "react";
 export default function ShiftView() {
-    const [idUser, setIdUser] = useState(null)
+  const [idUser, setIdUser] = useState(null);
+  const [userDate, setUserDate] = useState(null);
   const { authorization } = useCheckLoginContext();
   const { response, error } = useFetch(
     `http://localhost:3000/user/shift/${authorization.id}`
@@ -15,20 +16,34 @@ export default function ShiftView() {
   const fechaEnFormatoYYYYMMDD = `${year}-${month}-${day}`;
   console.log(fechaEnFormatoYYYYMMDD);
 
-  useEffect(function () {
-  async function saveAssistance( id) {
-    const res = await fetch(`http://localhost:3000/user/assistance`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ idusuarios: id }),
-  })
-      if (res.status === 401) {
-        throw "Not authorized";
-      } else if (res.status === 200) {
-        alert(`user with id: ${id} saved successfully`);
+  useEffect(//convertir en onclick
+    function () {
+      async function saveAssistance(id) {
+        const res = await fetch(`http://localhost:3000/user/assistance`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idusuarios: id }),
+        });
+        if (res.status === 401) {
+          throw "Not authorized";
+        } else if (res.status === 200) {
+          alert(`user with id: ${id} saved successfully`);
+        }
       }
-  }saveAssistance(idUser); },[idUser])
-  console.log(response);
+      saveAssistance(idUser);
+    },
+    [idUser]
+  );
+  useEffect(function () {
+    async function fetchDate(id) {
+      await fetch(`http://localhost:3000/user/date/${id}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idusuarios: id }),
+      });
+    }
+    fetchDate;
+  });
   return (
     <>
       <h1>Esto es Shift</h1>

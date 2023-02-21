@@ -13,6 +13,7 @@ userRouter.patch("/validate/:id", userController.validate);
 userRouter.get("/shift/:id", userController.getShiftList);
 userRouter.get("/users", userController.getUsers);
 userRouter.post("/assistance", userController.saveAssistance);
+userRouter.get("/date/:id", userController.fetchUserDate);
 
 
 
