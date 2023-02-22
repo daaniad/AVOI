@@ -1,16 +1,8 @@
 import EventsView from "./EventsView";
+import useFetch from "../../hooks/useFetch/useFetch";
 
 export default function Events() {
+  const {response, error} = useFetch(`http://localhost:3000/event`)
   
-  return <EventsView/>;
+  return <EventsView events={response}/>;
 }
-
-// const {response,error} = useFetch("https://rickandmortyapi.com/api/character",{
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(credentials),
-//   });
-// console.log(response)
-//     return(
-//         <EventsView events={response}/>
-//     )

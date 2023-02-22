@@ -55,7 +55,7 @@ export default function Navbar() {
                 <Link
                   className="nav-link active"
                   aria-current="page"
-                  to={NOTICE}
+                  to={`notice/${authorization.id}`}
                 >
                   {NOTICE_LABEL}
                 </Link>

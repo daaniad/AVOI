@@ -108,10 +108,10 @@ controller.saveAssistance = async (req, res) => {
   }
 };
 
-controller.fetchUserDate = async (req, res) => {
+controller.fetchAdmin = async (req, res) => {
   const {id} = req.params;
   try {
-    const date = await dao.fetchUserDate(id);
+    const date = await dao.fetchAdmin(id);
     return res.send(date);
   } catch (e) {
     console.log(e.message);

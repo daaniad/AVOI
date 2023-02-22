@@ -11,13 +11,10 @@ eventQueries.addEvent = async (eventData) => {
     // Creamos un objeto con los dats de la imagen a guardar en la base de datos.
     // Usamos la libreria momentjs para registrar la fecha actual
     let imageObj = {
-      
-        titulo: eventData.titulo,
-        descripcion: eventData.descripcion,
-        fecha: eventData.fecha,
-        imagen: eventData.imagen,
-
-      
+      titulo: eventData.titulo,
+      descripcion: eventData.descripcion,
+      fecha: eventData.fecha,
+      imagen: eventData.imagen,
     };
     return await db.query(
       "INSERT INTO eventos SET ?",
@@ -32,31 +29,15 @@ eventQueries.addEvent = async (eventData) => {
   }
 };
 
-eventQueries.getImageById = async (id) => {
-  // Conectamos con la base de datos y buscamos si existe la imagen por su id.
-  let conn = null;
-  try {
-    conn = await db.createConnection();
-    return await db.query(
-      "SELECT * FROM imagenes WHERE id = ?",
-      id,
-      "select",
-      conn
-    );
-  } catch (e) {
-    throw new Error(e);
-  } finally {
-    conn && (await conn.end());
-  }
-};
 
-eventQueries.getProductById = async (id) => {
+
+eventQueries.getEventById = async (id) => {
   // Conectamos con la base de datos y buscamos si existe el producto por su id.
   let conn = null;
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM productos JOIN imagenes on productos.id = imagenes.idproducto WHERE productos.id = ?",
+      "SELECT * FROM event WHERE id = ?",
       id,
       "select",
       conn
@@ -68,13 +49,13 @@ eventQueries.getProductById = async (id) => {
   }
 };
 
-eventQueries.deleteImage = async (id) => {
+eventQueries.dropEvent = async (id) => {
   // Conectamos con la base de datos y buscamos si existe la imagen por su id.
   let conn = null;
   try {
     conn = await db.createConnection();
     return await db.query(
-      "DELETE * FROM imagenes WHERE id = ?",
+      "DELETE * FROM eventos WHERE id = ?",
       id,
       "select",
       conn
@@ -86,62 +67,16 @@ eventQueries.deleteImage = async (id) => {
   }
 };
 
-eventQueries.insertProduct = async (productData) => {
- 
-};
 
-eventQueries.getProductByRef = async (reference) => {
-     // Conectamos con la base de datos y buscamos si existe el usuario por el email.
+
+
+
+
+eventQueries.fetchEvents = async () => {
   let conn = null;
   try {
     conn = await db.createConnection();
-    return await db.query(
-      "SELECT * FROM productos WHERE referencia = ?",
-      reference,
-      "select",
-      conn
-    );
-  } catch (e) {
-    throw new Error(e);
-  } finally {
-    conn && (await conn.end());
-  }
-}
-
-eventQueries.addProduct = async (productData) => {
-    let conn = null;
-    try {
-        conn = await db.createConnection();
-        console.log(productData);
-        let productObj = {
-            nombre:productData.name,
-            descripcion: productData.description,
-            precio: productData.price,
-            stock: productData.stock,
-            referencia: productData.reference,
-            fechaAlta: moment().format("YYYY-MM-DD HH:mm:ss"),
-        }
-        return await db.query(
-            "INSERT INTO productos SET ?", productObj, 'insert', conn
-        )
-    } catch(e) {
-        throw new Error(e);
-    } finally {
-        conn && (await conn.end());
-    }
-}
-
-eventQueries.getProduct = async () => {
-  // Conectamos con la base de datos y buscamos si existe la imagen por su id.
-  let conn = null;
-  try {
-    conn = await db.createConnection();
-    return await db.query(
-      "SELECT * FROM productos JOIN imagenes on productos.id = imagenes.idproducto",
-      [],
-      "select",
-      conn
-    );
+    return await db.query("SELECT * FROM eventos",[], "select", conn);
   } catch (e) {
     throw new Error(e);
   } finally {

@@ -38,22 +38,6 @@ dao.getShiftList = async (id) => await userQueries.getShiftList(id);
 
 dao.validate = async (id, dispData) => await userQueries.validate(id, dispData);
 
-dao.addEvent = async (eventData) => await eventQueries.addEvent(eventData);
-
-//Obtener imagen por su id
-dao.getImageById = async (id) => await eventQueries.getImageById(id);
-
-// Obtener producto por su referencia
-dao.getProductByRef = async (reference) =>
-  await eventQueries.getProductByRef(reference);
-
-// Añadir producto
-dao.insertProduct = async (productData) =>
-  await eventQueries.addProduct(productData);
-
-dao.getProduct = async () => await eventQueries.getProduct();
-
-dao.getProductById = async (id) => await eventQueries.getProductById(id);
 
 dao.getUserToValidate = async () => await userQueries.getUserToValidate();
 
@@ -63,8 +47,19 @@ dao.getUserByShift = async (id) => await userQueries.usersByShift(id);
 
 dao.saveAssistance = async (assistData) => await userQueries.saveAssistance(assistData);
 
-dao.fetchUserDate = async(id) => await userQueries.fetchUserDate(id);
+dao.fetchAdmin = async(id) => await userQueries.fetchAdmin(id);
 
 dao.getUsers = async () => await userQueries.getUsers();
 
+// EVENTS
+
+dao.addEvent = async (eventData) => await eventQueries.addEvent(eventData);
+
+//Obtener imagen por su id
+dao.getImageById = async (id) => await eventQueries.getImageById(id);
+
+dao.fetchEvents = async() => await eventQueries.fetchEvents();
+
+
+dao.getProductById = async (id) => await eventQueries.getProductById(id);
 export default dao;

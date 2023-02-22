@@ -181,8 +181,8 @@ userQueries.usersByShift = async (id) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT usuarios.id, usuarios.nombre, usuarios.apellidos, usuarios.idturno, asistencia.fAsist FROM usuarios JOIN asistencia on usuarios.id = asistencia.idusuarios JOIN disponibilidad on asistencia.idusuarios = disponibilidad.idusuario JOIN dias on disponibilidad.idSemana = dias.id WHERE dias.responsable = ?",
-      id,
+      "SELECT usuarios.id, usuarios.nombre, usuarios.apellidos, usuarios.idturno, asistencia.fAsist FROM usuarios LEFT JOIN asistencia on usuarios.id = asistencia.idusuarios JOIN disponibilidad on disponibilidad.id = usuarios.idturno WHERE idSemana = (SELECT id from dias WHERE responsable = ?) and mañana = (SELECT mañana FROM dias WHERE responsable = ?)",
+      [id,id],
       "select",
       conn
     );
@@ -192,6 +192,8 @@ userQueries.usersByShift = async (id) => {
     conn && (await conn.end());
   }
 };
+// Query con fecha
+// SELECT usuarios.id, usuarios.nombre, usuarios.apellidos, usuarios.idturno, asistencia.fAsist FROM usuarios JOIN asistencia on usuarios.id = asistencia.idusuarios JOIN disponibilidad on asistencia.idusuarios = disponibilidad.idusuario JOIN dias on disponibilidad.idSemana = dias.id WHERE dias.responsable = ?
 
 userQueries.getUsers = async () => {
   let conn = null;
@@ -232,12 +234,12 @@ userQueries.saveAssistance = async (assistData) => {
   }
 };
 
-userQueries.fetchUserDate = async (id) => {
+userQueries.fetchAdmin = async (id) => {
   let conn = null;
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT fAsist from asistencia WHERE idusuarios = ?",
+      "SELECT * FROM usuarios WHERE id = (SELECT responsable FROM dias JOIN disponibilidad on dias.id = disponibilidad.idSemana JOIN usuarios on disponibilidad.idusuario = usuarios.id  WHERE responsable = ? limit 1)",
       id,
       "select",
       conn

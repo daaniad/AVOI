@@ -1,13 +1,19 @@
-import useFetch from "../../hooks/useFetch/useFetch";
 import { useCheckLoginContext } from "../../contexts/AuthContext/loginContext";
 import { useEffect, useState } from "react";
 export default function ShiftView() {
-  const [idUser, setIdUser] = useState(null);
   const [userDate, setUserDate] = useState(null);
   const { authorization } = useCheckLoginContext();
-  const { response, error } = useFetch(
-    `http://localhost:3000/user/shift/${authorization.id}`
-  );
+
+  useEffect(function () {
+    async function fetchUsers() {
+      const response = await fetch(
+        `http://localhost:3000/user/shift/${authorization.id}`
+      );
+      const data = await response.json();
+      setUserDate(data);
+    }
+    fetchUsers();
+  }, []);
 
   let currentDate = new Date();
   const year = currentDate.getFullYear();
@@ -16,46 +22,41 @@ export default function ShiftView() {
   const fechaEnFormatoYYYYMMDD = `${year}-${month}-${day}`;
   console.log(fechaEnFormatoYYYYMMDD);
 
-  useEffect(//convertir en onclick
-    function () {
-      async function saveAssistance(id) {
-        const res = await fetch(`http://localhost:3000/user/assistance`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ idusuarios: id }),
-        });
-        if (res.status === 401) {
-          throw "Not authorized";
-        } else if (res.status === 200) {
-          alert(`user with id: ${id} saved successfully`);
-        }
-      }
-      saveAssistance(idUser);
-    },
-    [idUser]
-  );
-  useEffect(function () {
-    async function fetchDate(id) {
-      await fetch(`http://localhost:3000/user/date/${id}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idusuarios: id }),
-      });
+  async function saveAssistance(e, id) {
+    e.preventDefault();
+    const res = await fetch(`http://localhost:3000/user/assistance`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idusuarios: id }),
+    });
+    if (res.status === 401) {
+      throw "Not authorized";
+    } else if (res.status === 200) {
+      alert(`user with id: ${id} saved successfully`);
+      setUserDate();
     }
-    fetchDate;
-  });
+  }
+
   return (
     <>
       <h1>Esto es Shift</h1>
 
-      {response?.map((user) => (
+      {userDate?.map((user) => (
         <div key={user.id}>
           <li>
-            {user.nombre} {user.apellidos}
+            {user.nombre} {user.apellidos} {user.fAsist.split("T")[0]}
           </li>
-          <button name="idusuarios" onClick={() => setIdUser(user.id)}>
-            V
-          </button>
+          {user.fAsist === null ||
+          fechaEnFormatoYYYYMMDD != user.fAsist.split("T")[0] ? (
+            <button
+              name="idusuarios"
+              onClick={(e) => saveAssistance(e, user.id)}
+            >
+              V
+            </button>
+          ) : (
+            <p>Validado</p>
+          )}
         </div>
       ))}
     </>
