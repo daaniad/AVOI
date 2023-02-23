@@ -13,7 +13,7 @@ export default function ManageUsers() {
     fetchUsers();
   }, []);
 
-  async function fetchData(e,idusuario,idturno) {
+  async function fetchData(e, idusuario, idturno) {
     e.preventDefault();
     const response = await fetch(
       `http://localhost:3000/user/validate/${idusuario}`,

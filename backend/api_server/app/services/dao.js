@@ -17,9 +17,7 @@ dao.getUserToValidateAndShifts = async () => {
   let userToValidate = await dao.getUserToValidate();
   let shift = await dao.getUserShift();
 
-  if (userToValidate.length <= 0) {
-    throw "No user to validate";
-  }
+
 
   return userToValidate.map((user) => {
     return {
@@ -50,6 +48,8 @@ dao.saveAssistance = async (assistData) => await userQueries.saveAssistance(assi
 dao.fetchAdmin = async(id) => await userQueries.fetchAdmin(id);
 
 dao.getUsers = async () => await userQueries.getUsers();
+
+dao.alterDay = async (day, hour) => await userQueries.alterDay(day, hour);
 
 // EVENTS
 

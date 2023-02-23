@@ -9,8 +9,9 @@ export default function NoticeView() {
     <>
       <h1>Esto es Notice</h1>
       {response?.map((user) => (
-        <div key={user.id}>
-          <li>{user.nombre}</li>
+        <div className="d-flex" key={user.id}>
+          <li className="p-2">{user.nombre} {user.apellidos}</li>
+          <button className="rounded">Send Notice</button>
         </div>
       ))}
     </>

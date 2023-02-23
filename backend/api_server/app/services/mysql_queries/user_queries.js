@@ -181,7 +181,7 @@ userQueries.usersByShift = async (id) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT usuarios.id, usuarios.nombre, usuarios.apellidos, usuarios.idturno, asistencia.fAsist FROM usuarios LEFT JOIN asistencia on usuarios.id = asistencia.idusuarios JOIN disponibilidad on disponibilidad.id = usuarios.idturno WHERE idSemana = (SELECT id from dias WHERE responsable = ?) and mañana = (SELECT mañana FROM dias WHERE responsable = ?)",
+      "SELECT usuarios.id, usuarios.nombre, usuarios.apellidos, usuarios.idturno, asistencia.fAsist FROM usuarios LEFT JOIN asistencia on usuarios.id = asistencia.idusuarios JOIN disponibilidad on disponibilidad.id = usuarios.idturno WHERE idSemana = (SELECT id from dias WHERE responsable = ?) and mañana = (SELECT mañana FROM dias WHERE responsable = ?) and usuarios.validado = 1",
       [id,id],
       "select",
       conn
@@ -217,7 +217,7 @@ userQueries.saveAssistance = async (assistData) => {
 
   let assistObj = {
     idusuarios: assistData.idusuarios,
-    fAsist: moment().format("YYYY-MM-DD"),
+    fAsist: moment().format("YYYY-MM-DD HH:mm:ss"),
   };
   try {
     conn = await db.createConnection();
@@ -239,14 +239,33 @@ userQueries.fetchAdmin = async (id) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM usuarios WHERE id = (SELECT responsable FROM dias JOIN disponibilidad on dias.id = disponibilidad.idSemana JOIN usuarios on disponibilidad.idusuario = usuarios.id  WHERE responsable = ? limit 1)",
+      "SELECT * FROM usuarios WHERE id = (SELECT responsable FROM dias JOIN disponibilidad on dias.id = disponibilidad.idSemana JOIN usuarios on disponibilidad.idusuario = usuarios.id  WHERE usuarios.id = ? limit 1)",
       id,
       "select",
       conn
     );
   } catch (e) {
     throw new Error(e);
+  } finally {
+    conn && (await conn.end());
   }
 };
+
+userQueries.alterDay = async (day, hour) => {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "SELECT dias.id FROM dias Where diasSemana = ? and mañana = ?",
+      [day, hour],
+      "select",
+      conn
+    )
+  } catch(e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+}
 
 export default userQueries;

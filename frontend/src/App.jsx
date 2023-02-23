@@ -36,10 +36,10 @@ function App() {
       <Route path={HOME} element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="unauthorized" element={<Unauthorized />} />
-        <Route path={SIGNIN} element={<SignIn />} />
         {/* Public Routes */}
         <Route element={<PublicRoute />}>
           <Route path={LOGIN} element={<Login />} />
+        <Route path={SIGNIN} element={<SignIn />} />
         </Route>
 
         {/* Private Routes */}

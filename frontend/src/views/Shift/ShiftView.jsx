@@ -20,23 +20,28 @@ export default function ShiftView() {
   const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
   const day = ("0" + currentDate.getDate()).slice(-2);
   const fechaEnFormatoYYYYMMDD = `${year}-${month}-${day}`;
-  console.log(fechaEnFormatoYYYYMMDD);
+  
 
   async function saveAssistance(e, id) {
     e.preventDefault();
     const res = await fetch(`http://localhost:3000/user/assistance`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ idusuarios: id }),
+      body: JSON.stringify({ idusuarios: id, idresponsable: authorization.id }),
     });
     if (res.status === 401) {
       throw "Not authorized";
     } else if (res.status === 200) {
       alert(`user with id: ${id} saved successfully`);
-      setUserDate();
+      const data = await res.json()
+      setUserDate(data);
+      data.map((user) => (
+
+        console.log( fechaEnFormatoYYYYMMDD, user.fAsists, "fecha")
+      ))
     }
   }
-
+  
   return (
     <>
       <h1>Esto es Shift</h1>
@@ -44,13 +49,15 @@ export default function ShiftView() {
       {userDate?.map((user) => (
         <div key={user.id}>
           <li>
-            {user.nombre} {user.apellidos} {user.fAsist.split("T")[0]}
+            {user.nombre} {user.apellidos} 
+            {/* {user.fAsist.split("T")[0]} */}
           </li>
           {user.fAsist === null ||
           fechaEnFormatoYYYYMMDD != user.fAsist.split("T")[0] ? (
             <button
               name="idusuarios"
               onClick={(e) => saveAssistance(e, user.id)}
+              
             >
               V
             </button>

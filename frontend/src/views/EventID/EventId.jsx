@@ -1,5 +1,6 @@
+import EventIdView from "./EventIdView"
 export default function EventId() {
     return (
-        <EventId/>
+        <EventIdView/>
     )
 }

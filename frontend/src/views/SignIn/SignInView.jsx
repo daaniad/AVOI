@@ -2,13 +2,13 @@ import { useState, useRef } from "react";
 import { initialUserState } from "../../const/homeMenu/initialUserState";
 
 const dayWeek = {
-  1: "Lunes",
-  2: "Martes",
-  3: "Miercoles",
-  4: "Jueves",
-  5: "Viernes",
-  6: "Sabado",
-  7: "Domingo",
+  L: "Lunes",
+  M: "Martes",
+  X: "Miercoles",
+  J: "Jueves",
+  V: "Viernes",
+  S: "Sabado",
+  D: "Domingo",
 };
 
 const hour = {
@@ -147,13 +147,13 @@ export default function SignInView() {
           <div className="dialog-box">
             <select ref={dayRef} name="idSemana">
               <option value="">Selecciona un dia de la semana</option>
-              <option value={1}>Lunes</option>
-              <option value={2}>Martes</option>
-              <option value={3}>Miercoles</option>
-              <option value={4}>Jueves</option>
-              <option value={5}>Viernes</option>
-              <option value={6}>Sabado</option>
-              <option value={7}>Domingo</option>
+              <option value="L">Lunes</option>
+              <option value="M">Martes</option>
+              <option value="X">Miercoles</option>
+              <option value="J">Jueves</option>
+              <option value="V">Viernes</option>
+              <option value="S">Sabado</option>
+              <option value="D">Domingo</option>
             </select>
             <select ref={hourRef} name="mañana">
               <option value="">Selecciona un turno</option>

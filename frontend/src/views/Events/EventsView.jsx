@@ -4,7 +4,6 @@ export default function EventsView({ events }) {
     <>
       <h1>Esto es Events</h1>
 
-      {/* Futura tarjeta de evento para ir a evento detalle */}
       <div className="d-flex">
         {events?.map((event) => (
           <div className="card" style={{ width: "18rem" }} key={event.id}>

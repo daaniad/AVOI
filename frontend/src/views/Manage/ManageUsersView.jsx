@@ -2,12 +2,19 @@ import { useState } from "react";
 
 const dayWeek = {
   1: "Lunes",
-  2: "Martes",
-  3: "Miercoles",
-  4: "Jueves",
-  5: "Viernes",
-  6: "Sabado",
-  7: "Domingo",
+  2: "Lunes",
+  3: "Martes",
+  4: "Martes",
+  5: "Miercoles",
+  6: "Miercoles",
+  7: "Jueves",
+  8: "Jueves",
+  9: "Viernes",
+  10: "Viernes",
+  11: "Sabado",
+  12: "Sabado",
+  13: "Domingo",
+  14: "Domingo",
 };
 
 const hour = {
@@ -32,12 +39,12 @@ export default function ManageUsersView({ response,onSubmit }) {
     <>
       <h1>Esto es Manage Users</h1>
 
-      {response ? (
-        response.map((user, index) => (
+      {response.length >0 ? (
+        response.map((user) => (
           <>
             <ol className="list-group list-group d-flex flex-row p-3">
-              <div className="">
-                <li className="list-group-item" key={user.id}>
+              <div key={user.id} className="">
+                <li className="list-group-item">
                   {user.nombre} {user.apellidos}
                 </li>
                 <button
@@ -56,9 +63,9 @@ export default function ManageUsersView({ response,onSubmit }) {
                   className="d-flex"
                 >
                   <fieldset id="turnos">
-                    <legend>Select a maintenance drone:</legend>
-                    {user.turnos.map((shift) => (
-                      <div>
+                    <legend>Select shift:</legend>
+                    {user.turnos.map((shift, index) => (
+                      <div key={index}>
                         <input
                           type="radio"
                           id={shift.idDisponibilidad}

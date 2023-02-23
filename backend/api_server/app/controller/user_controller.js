@@ -9,17 +9,18 @@ controller.addUser = async (req, res) => {
     req.body;
   if (!name || !surname || !email || !password || !address || !pc)
     return res.status(400).send("Body error");
-
+  console.log(req.body);
   try {
     const user = await dao.getUserByEmail(email);
     if (user.length > 0)
       return res.status(409).send(`User ${name} already registered`);
     const addUser = await dao.addUser(req.body);
-    console.log(addUser);
 
+    
     availability.map(async function (turn) {
+     const idsemana = await dao.alterDay(turn.day, Number(turn.hour));
       await dao.addDisp({
-        diasSemana: Number(turn.day),
+        diasSemana: Number(idsemana[0].id),
         mañana: Number(turn.hour),
         idusuario: addUser,
       });
@@ -77,6 +78,7 @@ controller.validate = async (req, res) => {
     if (Object.entries(req.body).length === 0)
       return res.status(400).send("Body error");
     await dao.validate(req.params.id, req.body);
+    
 
     return res.send(await dao.getUserToValidateAndShifts());
   } catch (e) {
@@ -100,7 +102,7 @@ controller.saveAssistance = async (req, res) => {
   try {
     const assistance = await dao.saveAssistance(req.body);
     if (assistance) {
-      return res.send("Assistance saved successfully");
+      return res.send(await dao.getUserByShift(req.body.idresponsable));
     }
   } catch (e) {
     console.log(e.message);
@@ -109,7 +111,7 @@ controller.saveAssistance = async (req, res) => {
 };
 
 controller.fetchAdmin = async (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   try {
     const date = await dao.fetchAdmin(id);
     return res.send(date);
