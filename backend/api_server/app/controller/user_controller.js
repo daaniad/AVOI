@@ -1,6 +1,7 @@
 import { SignJWT, jwtVerify } from "jose";
 import md5 from "md5";
 import dao from "../services/dao.js";
+import {transporter} from "../config/nodemailer.js"
 
 const controller = {};
 
@@ -140,5 +141,28 @@ controller.getUsers = async (req, res) => {
     console.log(e.message);
   }
 };
+
+controller.mailToAdmin = async (req, res) => {
+  try {
+    const user = await dao.getUserById(req.params.id)
+    const admin = await dao.fetchAdmin(req.params.id)
+    
+        await transporter.sendMail({
+          from: ` ${user[0].nombre}`, // sender address
+          to: `<${admin[0].email}>`,
+          subject: "No asistencia", // Subject line
+          // text: "Hello world?", // plain text body
+          html: `${user[0].nombre} se ha eliminado`, // html body
+        });
+      return res.send({user,admin})
+       
+    ;
+        
+      
+    
+  }catch(e) {
+    console.log(e.message);
+  }
+}
 
 export default controller;

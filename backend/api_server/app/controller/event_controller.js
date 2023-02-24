@@ -13,9 +13,6 @@ controller.addEvent = async (req, res) => {
       return res.status(400).send("No se ha cargado ningún archivo");
     }
 
-    if (!req.query) {
-      return res.status(400).send("No hay id de producto");
-    }
 
     const images = !req.files.imagen.length
       ? [req.files.imagen]

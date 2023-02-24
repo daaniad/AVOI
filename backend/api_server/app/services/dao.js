@@ -32,7 +32,6 @@ dao.getUserToValidateAndShifts = async () => {
 dao.getShiftList = async (id) => await userQueries.getShiftList(id); 
 
 dao.fetchUsersByName = async(nombre) => await userQueries.fetchUsersByName(nombre)
-// events queries daos'
 
 dao.validate = async (id, dispData) => await userQueries.validate(id, dispData);
 
@@ -47,16 +46,19 @@ dao.saveAssistance = async (assistData) => await userQueries.saveAssistance(assi
 
 dao.fetchAdmin = async(id) => await userQueries.fetchAdmin(id);
 
+dao.getUserById = async (id) => await userQueries.getUserById(id);
+
 dao.getUsers = async () => await userQueries.getUsers();
 
 dao.alterDay = async (day, hour) => await userQueries.alterDay(day, hour);
 
 // EVENTS
+// events queries daos'
 
 dao.addEvent = async (eventData) => await eventQueries.addEvent(eventData);
 
 //Obtener imagen por su id
-dao.getImageById = async (id) => await eventQueries.getImageById(id);
+dao.getEventById = async (id) => await eventQueries.getEventById(id);
 
 dao.fetchEvents = async() => await eventQueries.fetchEvents();
 

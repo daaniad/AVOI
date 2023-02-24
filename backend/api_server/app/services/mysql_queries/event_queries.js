@@ -1,5 +1,4 @@
 import db from "../mysql.js";
-import moment from "moment/moment.js";
 
 const eventQueries = {};
 
@@ -37,7 +36,7 @@ eventQueries.getEventById = async (id) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM event WHERE id = ?",
+      "SELECT * FROM eventos WHERE id = ?",
       id,
       "select",
       conn

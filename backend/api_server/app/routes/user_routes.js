@@ -14,7 +14,8 @@ userRouter.get("/shift/:id", userController.getShiftList);
 userRouter.get("/users", userController.getUsers);
 userRouter.post("/assistance", userController.saveAssistance);
 userRouter.get("/admin/:id", userController.fetchAdmin);
-userRouter.get("/:nombre", userController.fetchUsersByName)
+userRouter.get("/:nombre", userController.fetchUsersByName);
+userRouter.get("/:id/mail", userController.mailToAdmin);
 
 
 
