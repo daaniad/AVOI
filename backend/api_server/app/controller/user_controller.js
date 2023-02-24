@@ -121,6 +121,17 @@ controller.fetchAdmin = async (req, res) => {
   }
 };
 
+controller.fetchUsersByName = async (req, res) => {
+  const {nombre} = req.params;
+  try {
+    const user = await dao.fetchUsersByName(nombre);
+    return res.send(user);
+  } catch(e) {
+    console.log(e.message);
+    res.status(400).send(e.message)
+  }
+}
+
 controller.getUsers = async (req, res) => {
   try {
     const user = await dao.getUsers();

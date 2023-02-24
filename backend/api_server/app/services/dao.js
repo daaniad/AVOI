@@ -31,7 +31,7 @@ dao.getUserToValidateAndShifts = async () => {
 
 dao.getShiftList = async (id) => await userQueries.getShiftList(id); 
 
-
+dao.fetchUsersByName = async(nombre) => await userQueries.fetchUsersByName(nombre)
 // events queries daos'
 
 dao.validate = async (id, dispData) => await userQueries.validate(id, dispData);
