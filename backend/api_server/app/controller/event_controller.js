@@ -13,7 +13,6 @@ controller.addEvent = async (req, res) => {
       return res.status(400).send("No se ha cargado ningún archivo");
     }
 
-
     const images = !req.files.imagen.length
       ? [req.files.imagen]
       : req.files.imagen;
@@ -36,8 +35,6 @@ controller.addEvent = async (req, res) => {
     return res.status(400).send(e.message);
   }
 };
-
-
 
 controller.fetchEvents = async (req, res) => {
   try {
@@ -63,20 +60,14 @@ controller.getEventById = async (req, res) => {
 
 controller.updateEvent = async (req, res) => {
   try {
+    await dao.updateEvent(req.params.id, req.body);
+    const event = await dao.getEventById(req.params.id)
 
-   
-      await dao.updateTitle(req.params.id, req.body);
-      await dao.updateDate(req.params.id, req.body);
-      await dao.updateDesc(req.params.id, req.body);
-      await dao.updateImg(req.params.id, req.body);
-
-    ;
-    return res.send("Evento subido!");
+    return res.send(event);
   } catch (e) {
     console.log(e.message);
     return res.status(400).send(e.message);
   }
 };
-
 
 export default controller;
