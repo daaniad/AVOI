@@ -83,4 +83,61 @@ eventQueries.fetchEvents = async () => {
   }
 };
 
+eventQueries.updateTitle = async (id, eventData)=> {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    let eventObj = {
+      titulo: eventData.titulo,
+    }
+    return await db.query("UPDATE eventos SET ? WHERE id = ?", [eventObj, id], "update", conn)
+  } catch(e) {
+    throw new Error (e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+eventQueries.updateDate = async (id, eventData)=> {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    let eventObj = {
+      fecha: eventData.fecha,
+    }
+    return await db.query("UPDATE eventos SET ? WHERE id = ?", [eventObj, id], "update", conn)
+  } catch(e) {
+    throw new Error (e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+eventQueries.updateDesc = async (id, eventData)=> {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    let eventObj = {
+      descripcion: eventData.descripcion,
+    }
+    return await db.query("UPDATE eventos SET ? WHERE id = ?", [eventObj, id], "update", conn)
+  } catch(e) {
+    throw new Error (e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+eventQueries.updateImg = async (id, eventData)=> {
+  let conn = null;
+  try {
+    conn = await db.createConnection();
+    let eventObj = {
+      imagen: eventData.imagen,
+    }
+    return await db.query("UPDATE eventos SET ? WHERE id = ?", [eventObj, id], "update", conn)
+  } catch(e) {
+    throw new Error (e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+
 export default eventQueries;

@@ -7,5 +7,6 @@ eventRouter.post("/upload", eventController.addEvent);
 
 eventRouter.get("/:id", eventController.getEventById);
 eventRouter.get("/", eventController.fetchEvents);
+eventRouter.patch("/update/:id", eventController.updateEvent);
 
 export default eventRouter

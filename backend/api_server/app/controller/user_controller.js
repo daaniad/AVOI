@@ -152,7 +152,7 @@ controller.mailToAdmin = async (req, res) => {
           to: `<${admin[0].email}>`,
           subject: "No asistencia", // Subject line
           // text: "Hello world?", // plain text body
-          html: `${user[0].nombre} se ha eliminado`, // html body
+          html: `${user[0].nombre} no podrá ir a su turno correspondiente`, // html body
         });
       return res.send({user,admin})
        

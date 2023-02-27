@@ -63,5 +63,8 @@ dao.getEventById = async (id) => await eventQueries.getEventById(id);
 dao.fetchEvents = async() => await eventQueries.fetchEvents();
 
 
-dao.getProductById = async (id) => await eventQueries.getProductById(id);
+dao.updateTitle = async(id, eventData) => await eventQueries.updateTitle(id, eventData)
+dao.updateDate = async(id, eventData) => await eventQueries.updateDate(id, eventData)
+dao.updateDesc = async(id, eventData) => await eventQueries.updateDesc(id, eventData)
+dao.updateImg = async(id, eventData) => await eventQueries.updateImg(id, eventData)
 export default dao;

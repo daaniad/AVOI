@@ -60,4 +60,23 @@ controller.getEventById = async (req, res) => {
     return res.status(400).send(e.message);
   }
 };
+
+controller.updateEvent = async (req, res) => {
+  try {
+
+   
+      await dao.updateTitle(req.params.id, req.body);
+      await dao.updateDate(req.params.id, req.body);
+      await dao.updateDesc(req.params.id, req.body);
+      await dao.updateImg(req.params.id, req.body);
+
+    ;
+    return res.send("Evento subido!");
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).send(e.message);
+  }
+};
+
+
 export default controller;
