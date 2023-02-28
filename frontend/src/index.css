@@ -5,16 +5,22 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #fff;
-
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  
+  --primary: #3ebb71;
+  --secondary: 
 }
 
 body {
+  background-color: #f5f5eb;
   font-family: 'Montserrat', sans-serif;
+  background-size: cover;
+  background-position: center center;
+  height: 240px;
 
 }
