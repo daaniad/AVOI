@@ -25,3 +25,6 @@ Typography:
 
 Doodle for the shitf organiser
 Coolors for colors palette
+
+
+Logo AVOI responsive: ?
