@@ -13,7 +13,7 @@ export const MANAGE_EVENTS = "manage-event"
 
 // LABELS
 export const HOME_LABEL = "HOME"
-export const SIGIN_LABEL = "SIGNIN"
+export const SIGIN_LABEL = "Sign-in"
 export const LOGIN_LABEL = "LOGIN"
 export const NOTICE_LABEL = "NOTICE"
 export const SHITF_LABEL= "SHIFT"
