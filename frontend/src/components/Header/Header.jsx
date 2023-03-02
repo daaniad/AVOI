@@ -24,6 +24,7 @@ import {
 import { Link } from "react-router-dom";
 import logo from "../../assets/Images/avoi.png";
 import * as Icon from "react-bootstrap-icons";
+import "./header.css"
 
 import { useCheckLoginContext } from "../../contexts/AuthContext/loginContext";
 
@@ -65,10 +66,10 @@ export default function Header() {
           )}
         </div>
         <div className="row">
-          <div className="col-12"></div>
+          <div className="col-12 col-lg"></div>
 
           <div
-            className="offcanvas offcanvas-end"
+            className="offcanvas canvas offcanvas-end"
             tabIndex="-1"
             id="offcanvasRight"
             aria-labelledby="offcanvasRightLabel"
@@ -77,12 +78,15 @@ export default function Header() {
               <h5 className="offcanvas-title" id="offcanvasRightLabel">
                 Perfil
               </h5>
+              <div className="text-center">
+
               <button
                 type="button"
-                className="btn-close"
+                className="bg-success btn btn-hover rounded border-success"
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
-              ></button>
+              ><span className="text-white ">Cerrar</span></button>
+              </div>
             </div>
             <div className="offcanvas-body text-center">
               {authorization.email ? (
@@ -93,13 +97,13 @@ export default function Header() {
                 </div>
               ) : (
                 <>
-                  <ul className="navbar-nav unstyled">
-                    <li className="unstyled">
-                      <Link className="nav-link p-2" to={LOGIN}>
+                  <ul className="navbar-nav">
+                    <li className="unstyled btn btn-primary hover-li mt-4">
+                      <Link className="nav-link" to={LOGIN}>
                         Login
                       </Link>
                     </li>
-                    <li className="mt-2">
+                    <li className="btn btn-warning hover-li mt-4">
                       <Link className="nav-link" to={SIGNIN}>
                         {SIGIN_LABEL}
                       </Link>
@@ -107,44 +111,44 @@ export default function Header() {
                   </ul>
                 </>
               )}
-              <ul className="navbar-nav unstyled">
-                <li className="btn-light btn-lg">
-                  <Link className="nav-link active" to={HOME}>
-                    <span>{HOME_LABEL}</span>
+              <ul className="navbar-nav ">
+                <li className="btn-light btn-lg mt-4">
+                  <Link className="nav-link hover-li-secondary " to={HOME}>
+                    <span className="hover-li-secondary">{HOME_LABEL}</span>
                   </Link>
                 </li>
-                <li className="btn-light btn-lg  nav-item">
+                <li className="btn-light btn-lg mt-4 nav-item">
                   <Link
-                    className="nav-link active"
+                    className="nav-link hover-li-secondary"
                     to={`notice/${authorization.id}`}
                   >
                     {NOTICE_LABEL}
                   </Link>
                 </li>
-                <li className="btn-light btn-lg  nav-item">
-                  <Link className="nav-link active" to={EVENTS}>
+                <li className="btn-light btn-lg mt-4 nav-item">
+                  <Link className="nav-link hover-li-secondary" to={EVENTS}>
                     {EVENTS_LABEL}
                   </Link>
                 </li>
 
                 {authorization.email && (
-                  <li>
-                    <Link className="" to={`shift/${authorization.id}`}>
+                  <li className="mt-4">
+                    <Link className="hover-li-secondary" to={`shift/${authorization.id}`}>
                       {SHITF_LABEL}
                     </Link>
                   </li>
                 )}
 
-                <li className="">
+                <li className="mt-4 btn-hover">
                   <Link
-                    className="text-decoration-none text-success"
+                    className="nav-link hover-li-secondary"
                     to={MANAGE}
                   >
                     {MANAGE_LABEL}
                   </Link>
                 </li>
-                <li>
-                  <Link className="nav-link" to={MANAGE_EVENTS}>
+                <li className="mt-4">
+                  <Link className="nav-link hover-li-secondary" to={MANAGE_EVENTS}>
                     {MANAGE_EVENTS_LABEL}
                   </Link>
                 </li>

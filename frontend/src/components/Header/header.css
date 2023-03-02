@@ -1,5 +1,31 @@
-.btn-hover:hover {
-    background-color: #0dff00;
-    border-color: #0dff00;
+
+  .menu-offcanvas{
+    text-decoration: none;
+    
+  }
+
+  .btn-hover span:hover{
+    text-decoration: underline;
+  }
+
+  .hover-li:hover{
+    text-decoration: underline;
+    border-color: white;
+    border-bottom: white 2px solid;
+    border-top: white 2px solid;
+    border-radius: 16px
+  }
+
+  .hover-li-secondary span{
+    font-weight: bold;
+  }
+  .hover-li-secondary:hover{
+    
+    text-decoration: underline;
+   
+  }
+
+  .canvas {
+    background: linear-gradient(120deg,  #f0e7ef , rgb(0, 75, 0));
   }
   
