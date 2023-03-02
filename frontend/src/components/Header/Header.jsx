@@ -90,8 +90,8 @@ export default function Header() {
             </div>
             <div className="offcanvas-body text-center">
               {authorization.email ? (
-                <div>
-                  <button className="" onClick={logout}>
+                <div className="">
+                  <button className="btn btn-warning" onClick={logout}>
                     Logout
                   </button>
                 </div>
@@ -132,8 +132,8 @@ export default function Header() {
                 </li>
 
                 {authorization.email && (
-                  <li className="mt-4">
-                    <Link className="hover-li-secondary" to={`shift/${authorization.id}`}>
+                  <li className="btn-light btn-lg mt-4 nav-item">
+                    <Link className="hover-li-secondary nav-link" to={`shift/${authorization.id}`}>
                       {SHITF_LABEL}
                     </Link>
                   </li>
