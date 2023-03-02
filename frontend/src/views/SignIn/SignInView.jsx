@@ -82,92 +82,131 @@ export default function SignInView() {
   }
   return (
     <>
-      <h1>Esto es SignIn</h1>
-      <form onSubmit={signIn}>
-        <input
-          type="text"
-          name="name"
-          placeholder="nombre"
-          value={newUser.name}
-          onChange={handleInput}
-        />
-        <input
-          type="text"
-          name="surname"
-          required
-          placeholder="apellidos"
-          value={newUser.surname}
-          onChange={handleInput}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="email"
-          value={newUser.email}
-          onChange={handleInput}
-        />
-        <input
-          type="password"
-          placeholder="pass"
-          name="password"
-          value={newUser.password}
-          onChange={handleInput}
-        />
-        <input
-          type="text"
-          placeholder="dirección"
-          name="address"
-          value={newUser.address}
-          onChange={handleInput}
-        />
-        <input
-          type="text"
-          placeholder="CP"
-          name="pc"
-          value={newUser.pc}
-          onChange={handleInput}
-        />
-        <ul>
-          {formValues.map((obj, index) => (
-            <div key={index}>
-              <li>
-                Dia de la semana: {dayWeek[obj.day]} en horario:{" "}
-                {hour[obj.hour]}
-              </li>
-
-              <button onClick={(e) => handleDeleteField(e, index)}>X</button>
+      <div className="container">
+        <div className="d-flex justify-content-center">
+          <form className="row g-3" onSubmit={signIn}>
+            <div className="form-group col-md-6">
+              <input
+                className="form-control"
+                type="text"
+                name="name"
+                placeholder="nombre"
+                value={newUser.name}
+                onChange={handleInput}
+              />
             </div>
-          ))}
-        </ul>
-        {!toggle ? (
-          <div>
-            <button onClick={addBtnClick}>Add New</button>
-          </div>
-        ) : (
-          <div className="dialog-box">
-            <select ref={dayRef} name="idSemana">
-              <option value="">Selecciona un dia de la semana</option>
-              <option value="L">Lunes</option>
-              <option value="M">Martes</option>
-              <option value="X">Miercoles</option>
-              <option value="J">Jueves</option>
-              <option value="V">Viernes</option>
-              <option value="S">Sabado</option>
-              <option value="D">Domingo</option>
-            </select>
-            <select ref={hourRef} name="mañana">
-              <option value="">Selecciona un turno</option>
-              <option value={1}>Mañana</option>
-              <option value={0}>Tarde</option>
-            </select>
-            <button className="add-btn" onClick={handleAddField}>
-              Add
-            </button>
-          </div>
-        )}
+            <div className="form-group col-md-6">
+              <input
+                className="form-control"
+                type="text"
+                name="surname"
+                required
+                placeholder="apellidos"
+                value={newUser.surname}
+                onChange={handleInput}
+              />
+            </div>
+            <div className="form-group">
 
-        <button type="submit">Sign-In</button>
-      </form>
+            <input
+              type="email"
+              className="form-control"
+              name="email"
+              placeholder="email"
+              value={newUser.email}
+              onChange={handleInput}
+            />
+            </div>
+            <div className="form-group">
+
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Contraseña"
+              name="password"
+              value={newUser.password}
+              onChange={handleInput}
+            />
+            </div>
+            <div className="form-group">
+
+            <input
+              type="text"
+              className="form-control"
+              placeholder="dirección"
+              name="address"
+              value={newUser.address}
+              onChange={handleInput}
+            />
+            </div>
+            <div className="form-group col-md-2">
+
+            <input
+              type="text"
+              className="form-control"
+              placeholder="CP"
+              name="pc"
+              value={newUser.pc}
+              onChange={handleInput}
+            />
+            </div>
+            <ul>
+              {formValues.map((obj, index) => (
+                <>
+                <div className="d-flex justify-content-start" key={index}>
+                  <div className="form-group col-9">
+
+                  <li className="form-control mb-3">
+                    Dia de la semana: {dayWeek[obj.day]} en horario:{" "}
+                    {hour[obj.hour]}
+                  </li>
+                  </div>
+                  <div className="ms-4">
+
+                  <button className="btn btn-danger" onClick={(e) => handleDeleteField(e, index)}>
+                    X
+                  </button>
+                  </div>
+                  </div>
+                </>
+              ))}
+            </ul>
+            {!toggle ? (
+              <div>
+                <button className="btn btn-primary" onClick={addBtnClick}>Crear turno</button>
+              </div>
+            ) : (
+              <div className="dialog-box form-group">
+                <select className="form-control col-md-6" ref={dayRef} name="idSemana">
+                  <option value="">Selecciona un dia de la semana</option>
+                  <option value="L">Lunes</option>
+                  <option value="M">Martes</option>
+                  <option value="X">Miercoles</option>
+                  <option value="J">Jueves</option>
+                  <option value="V">Viernes</option>
+                  <option value="S">Sabado</option>
+                  <option value="D">Domingo</option>
+                </select>
+                <select className="form-control mt-3 col-md-6" ref={hourRef} name="mañana">
+                  <option value="">Selecciona un turno</option>
+                  <option value={1}>Mañana</option>
+                  <option value={0}>Tarde</option>
+                </select>
+                <div>
+
+                <button className="btn btn-primary mt-3 row-3" onClick={handleAddField}>
+                  Añadir turno
+                </button>
+                </div>
+              </div>
+            )}
+            <div className="form-group">
+
+            <button className="btn btn-success form-control" type="submit">Sign-In</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </>
   );
 }
