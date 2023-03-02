@@ -21,24 +21,33 @@ export default function LoginView() {
 
   return (
     <>
-      <div>
-        <h2 className="">Esto es el Login</h2>
-        <form onSubmit={(e) => login(e, credentials)}>
+      <div className="container">
+        <div className="d-flex justify-content-center">
+
+        <form className="form-group" onSubmit={(e) => login(e, credentials)}>
+          <label className="mt-5">Email</label>
           <input
+          className="form-control"
             type="email"
             name="email"
             required
             value={credentials.email}
             onChange={handleCredentials}
           />
+          <label className="mt-5">Contraseña</label>
           <input
+          className="form-control"
             type="password"
             name="password"
             value={credentials.password}
             onChange={handleCredentials}
           />
-          <button type="submit">Login</button>
+          <div className="form-group row justify-content-center">
+
+          <button className="btn btn-lg mt-5 btn-success col-6" type="submit">Login</button>
+          </div>
         </form>
+        </div>
         
         
       </div>

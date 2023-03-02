@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <>
       <div id="page-content">
-        <div className="container text-center">
+        <div className="container text-center mt-5">
           <div className="row justify-content-center">
             <div className="col-md-7">
               <h1 className="fw-light mt-4 text-dark">
