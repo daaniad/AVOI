@@ -38,7 +38,7 @@ export default function Header() {
             AVOI
           </Link>
         </div>
-        <div className="d-flex mx-auto justify-content-center align-items-center p-5">
+        <div className="d-flex mx-auto p-5">
           <img src={logo} className="img-fluid w-100" />
         </div>
 
