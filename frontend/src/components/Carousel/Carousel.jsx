@@ -4,7 +4,7 @@ export default function Carousel() {
     <>
       <div
         id="carouselExampleAutoplaying"
-        className="carousel  slide"
+        className="carousel slide"
         data-bs-ride="carousel"
       >
         <div className="carousel-inner">
