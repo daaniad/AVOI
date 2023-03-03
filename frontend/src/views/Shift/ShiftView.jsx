@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 export default function ShiftView() {
   const [userDate, setUserDate] = useState(null);
   const { authorization } = useCheckLoginContext();
+  const style = {
+    transform: 'rotate(180deg)' , 
+    transition: 'transform 150ms ease', // smooth transition
+   }
 
   useEffect(function () {
     async function fetchUsers() {
@@ -44,23 +48,38 @@ export default function ShiftView() {
   
   return (
     <>
-      <h1>Esto es Shift</h1>
+    <div className="d-flex justify-content-center text-center">
+
+      <h1>Estos son los voluntarios para tu turno</h1>
+    </div>
+
+    <div className="d-flex justify-content-center mt-4 align-items-center">
+ <i style={style} className="bi fs-1 bi-hand-index-thumb text-success"></i>
+</div>
 
       {userDate?.map((user) => (
-        <div key={user.id}>
-          <li>
-            {user.nombre} {user.apellidos} 
-            {/* {user.fAsist.split("T")[0]} */}
-          </li>
+        <div className="d-flex justify-content-center" key={user.id}>
+          
+
+          <h3 className="m-4">
+            {user.nombre.replace(/^\w/, (c) =>
+                      c.toUpperCase()
+                    )} {user.apellidos.replace(/^\w/, (c) =>
+                    c.toUpperCase()
+                  )}
+          </h3>
           {user.fAsist === null ||
           fechaEnFormatoYYYYMMDD != user.fAsist.split("T")[0] ? (
-            <button
+            <div className="align-items-center d-flex">
+
+            <button className="btn btn-primary"
               name="idusuarios"
               onClick={(e) => saveAssistance(e, user.id)}
               
             >
               V
             </button>
+            </div>
           ) : (
             <p>Validado</p>
           )}
