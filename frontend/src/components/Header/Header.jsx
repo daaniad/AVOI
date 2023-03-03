@@ -76,7 +76,7 @@ export default function Header() {
           >
             <div className="offcanvas-header">
               <h5 className="offcanvas-title" id="offcanvasRightLabel">
-                Perfil
+                Navegación
               </h5>
               <div className="text-center">
 

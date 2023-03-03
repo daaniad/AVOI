@@ -8,7 +8,7 @@ export default function Footer() {
               <h1 className="fw-light mt-4 text-dark">
                 Síguenos en redes para más información
               </h1>
-              <div className="container d-flex justify-content-center">
+              <div className="container mt-5 d-flex justify-content-center">
                 <div className="m-3">
                     <a className="text-dark" href="https://www.instagram.com/asoc_avoi">
                   <i className="bi bi-instagram fs-1"></i>
@@ -28,7 +28,7 @@ export default function Footer() {
       </div>
       <footer
         id="sticky-footer"
-        className="flex-shrink-0 py-4 bg-dark text-white-50"
+        className="flex-shrink-0 py-4 bg-dark text-white-50 mt-5"
       >
         <div className="container text-center">
           <small>Copyright &copy; AVOI</small>

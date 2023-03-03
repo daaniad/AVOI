@@ -30,24 +30,31 @@ export default function NoticeView() {
       </div>
       
         
-          <div className="d-flex mt-5 justify-content-center">
             {response?.map((user) => (
-              <div className="mb-5 d-inline-flex" key={user.id}>
+              <>
+              <div className="mb-5 mt-5 d-flex text-center justify-content-center" key={user.id}>
                   <h2 className="">
-                    Hola{" "}
+                    ¡Hola,{" "}
                     {authorization.nombre.replace(/^\w/, (c) =>
                       c.toUpperCase()
                     )}
-                    , tu responsable es: {user.nombre.replace(/^\w/, (c) => c.toUpperCase())}{" "} {user.apellidos}
+                    ! Tu responsable es: {user.nombre.replace(/^\w/, (c) => c.toUpperCase())}{" "} {user.apellidos}
                   </h2>
-                <div className="ms-3">
+                  </div>
+                  <div className="d-flex text-center justify-content-center">
+
+                  <h2 className="">¡Avisa pulsando este botón!
+                  </h2>
+                  </div>
+                  
+                <div className="ms-3 mt-5 justify-content-center d-flex">
                   <button className="btn btn-success" onClick={(e) => mail(e)}>
                     Enviar correo
                   </button>
                 </div>
-              </div>
+              </>
+              
             ))}
-          </div>
 
     </>
   );
