@@ -51,7 +51,7 @@ export default function Header() {
               data-bs-target="#offcanvasRight"
               aria-controls="offcanvasRight"
             >
-              <Icon.PersonCircle className="fs-2" /> {authorization.nombre}
+              <Icon.PersonCircle className="fs-2" /> {authorization.nombre.replace(/^\w/, (c) => c.toUpperCase())}
             </button>
           ) : (
             <button
