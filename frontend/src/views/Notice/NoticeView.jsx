@@ -38,7 +38,7 @@ export default function NoticeView() {
                     {authorization.nombre.replace(/^\w/, (c) =>
                       c.toUpperCase()
                     )}
-                    ! Tu responsable es: {user.nombre.replace(/^\w/, (c) => c.toUpperCase())}{" "} {user.apellidos}
+                    ! Tu responsable es: {user.nombre.replace(/^\w/, (c) => c.toUpperCase())}{" "} {user.apellidos.replace(/^\w/, (c) => c.toUpperCase())}
                   </h2>
                   </div>
                   <div className="d-flex text-center justify-content-center">
