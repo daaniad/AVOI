@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "./manage.css";
 const dayWeek = {
   1: "Lunes",
   2: "Lunes",
@@ -21,7 +21,7 @@ const hour = {
   1: "Mañana",
   0: "Tarde",
 };
-export default function ManageUsersView({ response,onSubmit }) {
+export default function ManageUsersView({ response, onSubmit }) {
   const [validateDisp, setValidateDisp] = useState(null);
   const [userToShow, setUserToShow] = useState(false);
 
@@ -37,35 +37,51 @@ export default function ManageUsersView({ response,onSubmit }) {
 
   return (
     <>
-      <h1>Esto es Manage Users</h1>
+      <div className="d-flex justify-content-center text-center">
+        <h1>Estos son los usuarios que faltan por validar</h1>
+      </div>
 
-      {response.length >0 ? (
+      {response.length > 0 ? (
         response.map((user) => (
           <>
-            <ol className="list-group list-group d-flex flex-row p-3">
-              <div key={user.id} className="">
-                <li className="list-group-item">
-                  {user.nombre} {user.apellidos}
+            <ol className="d-flex align-items-center text-center justify-content-center flex-row p-3">
+              <div
+                key={user.id}
+                className="rounded-pill bg-white p-2"
+              >
+                <div className="">
+
+                <li className="no-list">
+                  {user.nombre.replace(/^\w/, (c) => c.toUpperCase())}{" "}
+                  {user.apellidos.replace(/^\w/, (c) => c.toUpperCase())}
                 </li>
+                </div>
+
+                <div className="d-flex align-items-center">
+
                 <button
                   onClick={(e) => handleToggle(e, user)}
                   type="button"
-                  className="btn btn-primary btn-sm d-flex justify-content-center"
+                  className="btn rounded-pill btn-primary btn-sm"
                 >
-                  Show shifts
+                  Mostrar turnos
                 </button>
-              </div>
+                </div>
+                  </div>
               {userToShow.id === user.id && (
                 <form
-                  onSubmit={(e) => onSubmit( e,user.id,validateDisp)}
+                  onSubmit={(e) => onSubmit(e, user.id, validateDisp)}
                   onChange={handleSelect}
                   value={user.turnos}
                   className="d-flex"
                 >
-                  <fieldset id="turnos">
-                    <legend>Select shift:</legend>
+                  <fieldset className="text-center nombre-titulo p-3 m-4" id="turnos">
+                    <h2>Seleccionar turno para {user.nombre}:</h2>
                     {user.turnos.map((shift, index) => (
-                      <div key={index}>
+                      <div
+                        className="d-flex justify-content-center"
+                        key={index}
+                      >
                         <input
                           type="radio"
                           id={shift.idDisponibilidad}
@@ -79,20 +95,23 @@ export default function ManageUsersView({ response,onSubmit }) {
                       </div>
                     ))}
                   </fieldset>
-
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-sm d-flex justify-content-center"
-                  >
-                    Validate shift
-                  </button>
+                  <div className="m-3 d-flex text-center align-items-center">
+                    <button
+                      type="submit"
+                      className="btn btn-success btn-sm d-flex justify-content-center"
+                    >
+                      Validate shift
+                    </button>
+                  </div>
                 </form>
               )}
             </ol>
           </>
         ))
       ) : (
-        <span>No response for now</span>
+        <div className="d-flex justify-content-center text-center">
+          <span>Todos los usuarios han sido validados. ¡Buen trabajo!</span>
+        </div>
       )}
     </>
   );

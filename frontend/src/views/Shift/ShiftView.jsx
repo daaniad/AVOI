@@ -1,5 +1,6 @@
 import { useCheckLoginContext } from "../../contexts/AuthContext/loginContext";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 export default function ShiftView() {
   const [userDate, setUserDate] = useState(null);
   const { authorization } = useCheckLoginContext();
@@ -36,7 +37,10 @@ export default function ShiftView() {
     if (res.status === 401) {
       throw "Not authorized";
     } else if (res.status === 200) {
-      alert(`user with id: ${id} saved successfully`);
+      Swal.fire(
+        `Asistencia de ${authorization.nombre} guardada correctamente`,
+        '¡Gracias por confirmar!',
+        'success');
       const data = await res.json()
       setUserDate(data);
       data.map((user) => (
@@ -81,7 +85,13 @@ export default function ShiftView() {
             </button>
             </div>
           ) : (
-            <p>Validado</p>
+            <>
+            <div className="d-flex justify-content-center align-items-center">
+
+            <h2>Validado</h2>
+            <i className="bi fs-2 bi-hand-thumbs-up"></i>
+            </div>
+            </>
           )}
         </div>
       ))}

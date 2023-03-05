@@ -31,8 +31,8 @@ export default function NoticeView() {
       
         
             {response?.map((user) => (
-              <>
-              <div className="mb-5 mt-5 d-flex text-center justify-content-center" key={user.id}>
+              <div key={user.id}>
+              <div className="mb-5 mt-5 d-flex text-center justify-content-center">
                   <h2 className="">
                     ¡Hola,{" "}
                     {authorization.nombre.replace(/^\w/, (c) =>
@@ -52,7 +52,7 @@ export default function NoticeView() {
                     Enviar correo
                   </button>
                 </div>
-              </>
+              </div>
               
             ))}
 

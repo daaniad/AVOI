@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { initialUserState } from "../../const/homeMenu/initialUserState";
+import Swal from "sweetalert2"
 
 const dayWeek = {
   L: "Lunes",
@@ -64,10 +65,16 @@ export default function SignInView() {
       if (response.status === 401) {
         throw "No autorizado";
       } else if (response.status === 200) {
-        alert(`User ${newUser.name} signed-in successfully`);
+        Swal.fire(
+          `Usuario ${newUser.name} registrado`,
+          '¡Gracias por registrarte!',
+          'success');
         setNewUser(initialUserState);
       } else if (response.status === 409) {
-        alert(`Usuario ya registrado`);
+        Swal.fire(
+          `Usuario con email ${newUser.email} ya registrado`,
+          'Prueba otro email',
+          'error');
       }
     });
   }

@@ -148,11 +148,15 @@ controller.mailToAdmin = async (req, res) => {
     const admin = await dao.fetchAdmin(req.params.id)
     
         await transporter.sendMail({
-          from: ` ${user[0].nombre}`, // sender address
-          to: `<${admin[0].email}>`,
+          from: ` ${user[0].nombre.replace(/^\w/, (c) =>
+          c.toUpperCase()
+        )}`, // sender address
+          to: `<avoipepe@gmail.com>`,
           subject: "No asistencia", // Subject line
           // text: "Hello world?", // plain text body
-          html: `${user[0].nombre} no podrá ir a su turno correspondiente`, // html body
+          html: `${user[0].nombre.replace(/^\w/, (c) =>
+          c.toUpperCase()
+        )} no podrá ir a su turno correspondiente`, // html body
         });
       return res.send({user,admin})
        

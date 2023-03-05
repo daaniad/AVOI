@@ -1,0 +1,15 @@
+.manage {
+    border-radius: 8px;
+    background: linear-gradient(120deg,  #f0e7f0 , rgb(123, 148, 95));
+}
+
+.nombre-titulo {
+    border-radius: 8px;
+    background: linear-gradient(to right, #FFE1E1, #FFECB3, #FFFFC2, #D8FFC2, #C2DFFF, #E6CCFF, #FFE1FF);
+
+
+}
+
+.no-list {
+    list-style: none;
+}
