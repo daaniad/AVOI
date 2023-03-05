@@ -47,9 +47,9 @@ export default function ManageUsersView({ response, onSubmit }) {
             <ol className="d-flex align-items-center text-center justify-content-center flex-row p-3">
               <div
                 key={user.id}
-                className="rounded-pill bg-white p-2"
+                className="rounded-pill shift-card btn-rain p-2"
               >
-                <div className="">
+                <div className="shift-name">
 
                 <li className="no-list">
                   {user.nombre.replace(/^\w/, (c) => c.toUpperCase())}{" "}
@@ -62,7 +62,7 @@ export default function ManageUsersView({ response, onSubmit }) {
                 <button
                   onClick={(e) => handleToggle(e, user)}
                   type="button"
-                  className="btn rounded-pill btn-primary btn-sm"
+                  className="rounded-pill btn-rain"
                 >
                   Mostrar turnos
                 </button>
@@ -79,10 +79,11 @@ export default function ManageUsersView({ response, onSubmit }) {
                     <h2>Seleccionar turno para {user.nombre}:</h2>
                     {user.turnos.map((shift, index) => (
                       <div
-                        className="d-flex justify-content-center"
+                        className="d-flex shift justify-content-center"
                         key={index}
                       >
                         <input
+                          className=""
                           type="radio"
                           id={shift.idDisponibilidad}
                           name="turnos"

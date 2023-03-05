@@ -13,3 +13,36 @@
 .no-list {
     list-style: none;
 }
+
+.btn-rain{
+    transition: 0.7s;
+    color: white;
+    border: none;
+    background-color: purple;
+}
+
+.shift:hover{
+    transition: 0.6s;
+}
+
+.shift:hover{
+    
+    font-size: larger;
+}
+
+.btn-rain:hover {
+    color: black;
+    font-size: larger;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, #FFE1E1, #FFECB3, #FFFFC2, #D8FFC2, #C2DFFF, #E6CCFF, #FFE1FF);
+}
+
+.shift-name {
+    font-size: larger;
+    color: black;
+}
+.shift-card {
+    font-size: larger;
+    background-color: #FFF;
+}
