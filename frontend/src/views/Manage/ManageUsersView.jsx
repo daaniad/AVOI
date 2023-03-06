@@ -44,10 +44,10 @@ export default function ManageUsersView({ response, onSubmit }) {
       {response.length > 0 ? (
         response.map((user) => (
           <>
-            <ol className="d-flex align-items-center text-center justify-content-center flex-row p-3">
+            <ol className="d-flex align-items-strech gap-3 text-center justify-content-center flex-row p-3">
               <div
                 key={user.id}
-                className="rounded-pill shift-card btn-rain p-2"
+                className="shift-card d-flex flex-column align-items-center p-5"
               >
                 <div className="shift-name">
 
@@ -62,7 +62,7 @@ export default function ManageUsersView({ response, onSubmit }) {
                 <button
                   onClick={(e) => handleToggle(e, user)}
                   type="button"
-                  className="rounded-pill btn-rain"
+                  className="btn btn-success"
                 >
                   Mostrar turnos
                 </button>
@@ -75,11 +75,11 @@ export default function ManageUsersView({ response, onSubmit }) {
                   value={user.turnos}
                   className="d-flex"
                 >
-                  <fieldset className="text-center nombre-titulo p-3 m-4" id="turnos">
+                  <fieldset className="nombre-titulo p-5" id="turnos">
                     <h2>Seleccionar turno para {user.nombre}:</h2>
                     {user.turnos.map((shift, index) => (
                       <div
-                        className="d-flex shift justify-content-center"
+                        className="d-flex shift justify-content-start"
                         key={index}
                       >
                         <input
@@ -95,17 +95,19 @@ export default function ManageUsersView({ response, onSubmit }) {
                         </label>
                       </div>
                     ))}
-                  </fieldset>
-                  <div className="m-3 d-flex text-center align-items-center">
+                  <div className="mt-3 d-flex text-center align-items-center">
                     <button
                       type="submit"
-                      className="btn btn-success btn-sm d-flex justify-content-center"
+                      className="btn btn-success d-flex justify-content-center"
                     >
                       Validate shift
                     </button>
                   </div>
+                  </fieldset>
                 </form>
               )}
+                <>
+                </>
             </ol>
           </>
         ))

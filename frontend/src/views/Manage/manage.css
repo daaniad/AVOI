@@ -5,7 +5,8 @@
 
 .nombre-titulo {
     border-radius: 8px;
-    background: linear-gradient(to right, #FFE1E1, #FFECB3, #FFFFC2, #D8FFC2, #C2DFFF, #E6CCFF, #FFE1FF);
+    background-color: #fff;
+    text-align: left;
 
 
 }

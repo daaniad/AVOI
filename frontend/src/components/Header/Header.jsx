@@ -21,10 +21,11 @@ import {
   SIGIN_LABEL,
   SIGNIN,
 } from "../../const/homeMenu/homeMenu";
+import { ROLES } from "../../const/homeMenu/roles";
 import { Link } from "react-router-dom";
 import logo from "../../assets/Images/avoi.png";
 import * as Icon from "react-bootstrap-icons";
-import "./header.css"
+import "./header.css";
 
 import { useCheckLoginContext } from "../../contexts/AuthContext/loginContext";
 
@@ -34,78 +35,101 @@ export default function Header() {
     <>
       <div className="d-flex p-2 container justify-content-between">
         <div className="d-flex align-items-center">
-          <Link className="nav-link btn-hover p-2" to={HOME}>
-            AVOI
-          </Link>
-        </div>
-        <div className="d-flex mx-auto p-5">
-          <img src={logo} className="img-fluid w-100" />
-        </div>
-
-        <div className="d-flex align-items-center">
           {authorization.email ? (
             <button
-              className="btn-success btn"
+              className="btn-secondary btn"
               type="button"
               data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasRight"
-              aria-controls="offcanvasRight"
+              data-bs-target="#offcanvasScrolling"
+              aria-controls="offcanvasScrolling"
             >
-              <Icon.PersonCircle className="fs-2" /> {authorization.nombre.replace(/^\w/, (c) => c.toUpperCase())}
+              <Icon.List className="fs-2" />{" "}
+              Hola, {authorization.nombre.replace(/^\w/, (c) => c.toUpperCase())}
             </button>
           ) : (
             <button
-              className="btn-success btn"
+              className="btn-secondary btn"
               type="button"
               data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasRight"
-              aria-controls="offcanvasRight"
+              data-bs-target="#offcanvasScrolling"
+              aria-controls="offcanvasScrolling"
             >
-              <Icon.PersonCircle className="fs-2" /> Cuenta
+              <Icon.List className="fs-2" /> Menú
             </button>
           )}
         </div>
+        <div className="d-flex mx-auto p-5">
+          <Link to={HOME}>
+
+          <img src={logo} className="img-fluid w-100" />
+          </Link>
+        </div>
+        {authorization.email ? (
+          <div className="d-flex align-items-center">
+          <button
+            className="btn btn-warning hover-li-secondary"
+            onClick={logout}
+          >
+            Logout
+          </button>
+        </div>
+        ) : (
+
+        <div className="d-flex align-items-center">
+          <Link className="btn btn-success" to={LOGIN}>
+            <span className="hover-li">Login</span>
+          </Link>
+        </div>
+        )}
         <div className="row">
           <div className="col-12 col-lg"></div>
 
           <div
-            className="offcanvas canvas offcanvas-end"
+            className="offcanvas canvas offcanvas-start"
+            data-bs-scroll="true"
+            data-bs-backdrop="false"
             tabIndex="-1"
-            id="offcanvasRight"
-            aria-labelledby="offcanvasRightLabel"
+            id="offcanvasScrolling"
+            aria-labelledby="offcanvasScrollingLabel"
           >
             <div className="offcanvas-header">
-              <h5 className="offcanvas-title" id="offcanvasRightLabel">
-                Navegación
+              <h5 className="offcanvas-title" id="offcanvasLabel">
+                Menú
               </h5>
               <div className="text-center">
-
-              <button
-                type="button"
-                className="bg-success btn btn-hover rounded border-success"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              ><span className="text-white ">Cerrar</span></button>
+                <button
+                  type="button"
+                  className="btn-secondary btn rounded border-secondary"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                >
+                  <span className="text-white hover-li-secondary">Cerrar</span>
+                </button>
               </div>
             </div>
             <div className="offcanvas-body text-center">
               {authorization.email ? (
                 <div className="">
-                  <button className="btn btn-warning" onClick={logout}>
+                  <button
+                    className="btn btn-warning hover-li-secondary"
+                    onClick={logout}
+                  >
                     Logout
                   </button>
                 </div>
               ) : (
                 <>
                   <ul className="navbar-nav">
-                    <li className="unstyled btn btn-primary hover-li mt-4">
+                    <li className="unstyled btn btn-success hover-li mt-4">
                       <Link className="nav-link" to={LOGIN}>
-                        Login
+                        <span className="hover-li">Login</span>
                       </Link>
                     </li>
-                    <li className="btn btn-warning hover-li mt-4">
+                    <li className="btn btn-secondary hover-li mt-4">
                       <Link className="nav-link" to={SIGNIN}>
-                        {SIGIN_LABEL}
+                        <span className="hover-li-secondary">
+                          {SIGIN_LABEL}
+                        </span>
                       </Link>
                     </li>
                   </ul>
@@ -117,43 +141,54 @@ export default function Header() {
                     <span className="hover-li-secondary">{HOME_LABEL}</span>
                   </Link>
                 </li>
-                {authorization.email &&
-                <li className="btn-light btn-lg mt-4 nav-item">
-                  <Link
-                    className="nav-link hover-li-secondary"
-                    to={`notice/${authorization.id}`}
-                  >
-                    {NOTICE_LABEL}
-                  </Link>
-                </li>
-                 }
+                {authorization.email && (
+                  <li className="btn-light btn-lg mt-4 nav-item">
+                    <Link
+                      className="nav-link hover-li-secondary"
+                      to={`notice/${authorization.id}`}
+                    >
+                      <span className="hover-li-secondary">{NOTICE_LABEL}</span>
+                    </Link>
+                  </li>
+                )}
                 <li className="btn-light btn-lg mt-4 nav-item">
                   <Link className="nav-link hover-li-secondary" to={EVENTS}>
-                    {EVENTS_LABEL}
+                    <span className="hover-li-secondary">{EVENTS_LABEL}</span>
                   </Link>
                 </li>
 
-                {authorization.role && (
+                {authorization.role != [ROLES.User] && (
                   <li className="btn-light btn-lg mt-4 nav-item">
-                    <Link className="hover-li-secondary nav-link" to={`shift/${authorization.id}`}>
-                      {SHITF_LABEL}
+                    <Link
+                      className="hover-li-secondary nav-link"
+                      to={`shift/${authorization.id}`}
+                    >
+                      <span className="hover-li-secondary">{SHITF_LABEL}</span>
                     </Link>
                   </li>
                 )}
 
-                <li className="mt-4 btn-hover">
-                  <Link
-                    className="nav-link hover-li-secondary"
-                    to={MANAGE}
-                  >
-                    {MANAGE_LABEL}
-                  </Link>
-                </li>
-                <li className="mt-4">
-                  <Link className="nav-link hover-li-secondary" to={MANAGE_EVENTS}>
-                    {MANAGE_EVENTS_LABEL}
-                  </Link>
-                </li>
+                {authorization.role == [ROLES.SuperAdmin] && (
+                  <>
+                    <li className="mt-4">
+                      <Link className="nav-link hover-li-secondary" to={MANAGE}>
+                        <span className="hover-li-secondary">
+                          {MANAGE_LABEL}
+                        </span>
+                      </Link>
+                    </li>
+                    <li className="mt-4">
+                      <Link
+                        className="nav-link hover-li-secondary"
+                        to={MANAGE_EVENTS}
+                      >
+                        <span className="hover-li-secondary">
+                          {MANAGE_EVENTS_LABEL}
+                        </span>
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>

@@ -30,7 +30,7 @@ export default function Carousel() {
             />
           </div>
           <div className="carousel-item">
-          <p className="centrado text-encima">El Camino</p>
+          <p className="centrado text-center text-encima">El Camino</p>
             <img
               src="/avoiCamino.png"
               className="d-block w-100"

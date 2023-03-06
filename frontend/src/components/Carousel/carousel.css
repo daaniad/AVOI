@@ -25,11 +25,11 @@ img {
 
   .centrado{
     position: absolute;
-    top: 8%;
-    left: 12%;
+    top: 85%;
+    left: 50%;
     transform: translate(-50%, -50%);
     font-size: 50px;
     color:#fff;
-    background-color: #c7a6a6ad;
+    text-shadow: 0px 0px 8px black ;
     border-radius: 8px;
 }

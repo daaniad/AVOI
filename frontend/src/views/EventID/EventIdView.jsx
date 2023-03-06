@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { ROLES } from "../../const/homeMenu/roles";
 import { useCheckLoginContext } from "../../contexts/AuthContext/loginContext";
-import "./eventID.css"
+import Swal from "sweetalert2";
+import "./eventID.css";
 
 export default function EventIdView() {
   const [toggle, setToggle] = useState(false);
@@ -13,8 +15,8 @@ export default function EventIdView() {
     descripcion: "",
     fecha: "",
   });
-  const {authorization} = useCheckLoginContext();
-  
+  const { authorization } = useCheckLoginContext();
+
   function handleToggleTrue(e) {
     e.preventDefault();
     setToggle(true);
@@ -29,14 +31,17 @@ export default function EventIdView() {
     setUpdatedEvent(newEvent);
   }
 
-  useEffect(function () {
-    async function fetchEvent() {
-      const response = await fetch(`http://localhost:3000/event/${id}`);
-      const data = await response.json();
-      setEvent(data);
-    }
-    fetchEvent();
-  }, [changeEvent]);
+  useEffect(
+    function () {
+      async function fetchEvent() {
+        const response = await fetch(`http://localhost:3000/event/${id}`);
+        const data = await response.json();
+        setEvent(data);
+      }
+      fetchEvent();
+    },
+    [changeEvent]
+  );
 
   async function updateEvent(e) {
     e.preventDefault();
@@ -47,24 +52,27 @@ export default function EventIdView() {
     });
     if (event.status === 200) {
       setToggle(!toggle);
-      setChangeEvent(!changeEvent)
+      setChangeEvent(!changeEvent);
+      Swal.fire("¡Evento modificado correctamente!", "", "success");
     } else {
-      alert("error");
+      Swal.fire("Error al modificar el evento", "Prueba de nuevo", "error");
       console.log(event.status);
     }
   }
 
   return (
     <>
-    <div className="text-center">
-
-      <h1>Bienvenido al evento {event?.titulo}</h1>
-    </div>
+      <div className="text-center">
+        <h1>Bienvenido al evento {event?.titulo}</h1>
+      </div>
 
       {event && !toggle && (
         <>
-          
-          <div className="card card-event" style={{ width: "18rem" }} key={event.id}>
+          <div
+            className="card card-event"
+            style={{ width: "18rem" }}
+            key={event.id}
+          >
             <img
               src={`http://127.0.0.1:3000/${event.imagen}`}
               className="card-img-top mw-100"
@@ -75,12 +83,13 @@ export default function EventIdView() {
               <p className="card-text">{event.descripcion}</p>
               <p className="card-text">{event.fecha.split("T")[0]}</p>
             </div>
-          {authorization.role === 2 &&
-          <div className="d-flex justify-content-center">
-
-            <button className="btn btn-success" onClick={handleToggleTrue}>Editar</button>
-          </div>
-          }
+            {authorization.role === 2 && (
+              <div className="d-flex justify-content-center">
+                <button className="btn btn-success" onClick={handleToggleTrue}>
+                  Editar
+                </button>
+              </div>
+            )}
           </div>
         </>
       )}
@@ -103,13 +112,23 @@ export default function EventIdView() {
                   onChange={handleUpdate}
                 ></input>
 
-                <input className="card-text form-control mt-4" name="descripcion" onChange={handleUpdate} value={updatedEvent.descripcion}>
-                </input>
-                <input type="date" className="card-text form-control mt-4" name="fecha" onChange={handleUpdate} value={updatedEvent.fecha}>
-                </input>
+                <input
+                  className="card-text form-control mt-4"
+                  name="descripcion"
+                  onChange={handleUpdate}
+                  value={updatedEvent.descripcion}
+                ></input>
+                <input
+                  type="date"
+                  className="card-text form-control mt-4"
+                  name="fecha"
+                  onChange={handleUpdate}
+                  value={updatedEvent.fecha}
+                ></input>
                 <div className="d-flex justify-content-center mt-4">
-
-                <button className="btn btn-success" type="submit">Guardar Cambios</button>
+                  <button className="btn btn-success" type="submit">
+                    Guardar Cambios
+                  </button>
                 </div>
               </form>
             </div>

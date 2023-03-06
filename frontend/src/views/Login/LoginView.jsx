@@ -44,7 +44,7 @@ export default function LoginView() {
           />
           <div className="form-group row justify-content-center">
 
-          <button className="btn btn-lg mt-5 btn-success col-6" type="submit">Login</button>
+          <button className="btn btn-lg mt-5 btn-success col-6" type="submit">Acceder</button>
           </div>
         </form>
         </div>

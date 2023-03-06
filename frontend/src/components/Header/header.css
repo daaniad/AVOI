@@ -1,31 +1,48 @@
+.canvas {
+  background: linear-gradient(120deg,  var(--bs-white-rgb));
+}
 
+.logo {
+  transition: 0.7s;
+}
+.logo:hover {
+  color: black;
+  font-size: larger;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to right, #FFE1E1, #FFECB3, #FFFFC2, #D8FFC2, #C2DFFF, #E6CCFF, #FFE1FF);
+}
   .menu-offcanvas{
     text-decoration: none;
     
   }
 
-  .btn-hover span:hover{
-    text-decoration: underline;
+  
+  .hover-li {
+    transition: 0.7s;
+    font-weight: bold;
   }
-
+  
+  .hover-li-secondary{
+    transition: 0.7s;
+  }
+  
   .hover-li:hover{
-    text-decoration: underline;
-    border-color: white;
-    border-bottom: white 2px solid;
-    border-top: white 2px solid;
-    border-radius: 16px
-  }
 
+    border-radius: 16px;
+    font-size: large;
+  }
+  
   .hover-li-secondary span{
     font-weight: bold;
   }
   .hover-li-secondary:hover{
     
-    text-decoration: underline;
+    font-size: large;
    
   }
-
-  .canvas {
-    background: linear-gradient(120deg,  #f0e7ef , rgb(0, 75, 0));
+  
+  .btn-hover span:hover{
+    text-decoration: underline;
   }
   
