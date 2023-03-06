@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useCheckLoginContext } from "../../contexts/AuthContext/loginContext";
+import "./eventID.css"
 
 export default function EventIdView() {
   const [toggle, setToggle] = useState(false);
@@ -11,7 +13,8 @@ export default function EventIdView() {
     descripcion: "",
     fecha: "",
   });
-
+  const {authorization} = useCheckLoginContext();
+  
   function handleToggleTrue(e) {
     e.preventDefault();
     setToggle(true);
@@ -53,14 +56,15 @@ export default function EventIdView() {
 
   return (
     <>
-      <h1>Esto es Evento Detalle</h1>
+      <h1>Bienvenido al evento {event.titulo}</h1>
 
       {event && !toggle && (
         <>
-          <div className="card" style={{ width: "18rem" }} key={event.id}>
+          
+          <div className="card card-event" style={{ width: "18rem" }} key={event.id}>
             <img
               src={`http://127.0.0.1:3000/${event.imagen}`}
-              className="card-img-top"
+              className="card-img-top mw-100"
               alt="..."
             />
             <div className="card-body">
@@ -68,8 +72,13 @@ export default function EventIdView() {
               <p className="card-text">{event.descripcion}</p>
               <p className="card-text">{event.fecha.split("T")[0]}</p>
             </div>
+          {authorization.role === 2 &&
+          <div className="d-flex justify-content-center">
+
+            <button className="btn btn-success" onClick={handleToggleTrue}>Editar</button>
           </div>
-          <button onClick={handleToggleTrue}>Editar</button>
+          }
+          </div>
         </>
       )}
 
@@ -82,20 +91,23 @@ export default function EventIdView() {
               alt="..."
             />
             <div className="card-body">
-              <form onSubmit={(e) => updateEvent(e)}>
+              <form className="form-group" onSubmit={(e) => updateEvent(e)}>
                 <input
-                  className="text-white card-title"
+                  className="form-control card-title"
                   name="titulo"
                   placeholder={event.title}
                   value={updatedEvent.titulo}
                   onChange={handleUpdate}
                 ></input>
 
-                <input className="card-text" name="descripcion" onChange={handleUpdate} value={updatedEvent.descripcion}>
+                <input className="card-text form-control mt-4" name="descripcion" onChange={handleUpdate} value={updatedEvent.descripcion}>
                 </input>
-                <input type="date" className="card-text" name="fecha" onChange={handleUpdate} value={updatedEvent.fecha}>
+                <input type="date" className="card-text form-control mt-4" name="fecha" onChange={handleUpdate} value={updatedEvent.fecha}>
                 </input>
-                <button type="submit">Guardar Cambios</button>
+                <div className="d-flex justify-content-center mt-4">
+
+                <button className="btn btn-success" type="submit">Guardar Cambios</button>
+                </div>
               </form>
             </div>
           </div>

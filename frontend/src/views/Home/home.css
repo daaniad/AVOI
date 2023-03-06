@@ -1,0 +1,45 @@
+@media (max-width: 576px) {
+    .resp {
+      font-size: 1.5rem;
+    }
+    .resp {
+      margin-top: 1rem;
+    }
+  }
+  
+  @media (min-width: 576px) {
+    .resp {
+      font-size: 2rem;
+    }
+    .resp {
+      margin-top: 2rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .resp {
+      font-size: 2.5rem;
+    }
+    .resp {
+      margin-top: 3rem;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .resp {
+      font-size: 3rem;
+    }
+    .resp {
+      margin-top: 4rem;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .resp {
+      font-size: 3.5rem;
+    }
+    .resp {
+      margin-top: 5rem;
+    }
+  }
+  

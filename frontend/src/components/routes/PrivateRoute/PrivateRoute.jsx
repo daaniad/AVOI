@@ -14,13 +14,4 @@ export default function PrivateRoute({allowedRoles}) {
   ) : (
     <Navigate to={LOGIN} state={{from: location}} replace />
   );
-  
-  // if (!authorization.email) {
-  //   return <Navigate to={LOGIN} />;
-  // }
-  // return (
-  //   <div>
-  //     <Outlet />
-  //   </div>
-  // );
 }

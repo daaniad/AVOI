@@ -117,6 +117,7 @@ export default function Header() {
                     <span className="hover-li-secondary">{HOME_LABEL}</span>
                   </Link>
                 </li>
+                {authorization.email &&
                 <li className="btn-light btn-lg mt-4 nav-item">
                   <Link
                     className="nav-link hover-li-secondary"
@@ -125,13 +126,14 @@ export default function Header() {
                     {NOTICE_LABEL}
                   </Link>
                 </li>
+                 }
                 <li className="btn-light btn-lg mt-4 nav-item">
                   <Link className="nav-link hover-li-secondary" to={EVENTS}>
                     {EVENTS_LABEL}
                   </Link>
                 </li>
 
-                {authorization.email && (
+                {authorization.role && (
                   <li className="btn-light btn-lg mt-4 nav-item">
                     <Link className="hover-li-secondary nav-link" to={`shift/${authorization.id}`}>
                       {SHITF_LABEL}

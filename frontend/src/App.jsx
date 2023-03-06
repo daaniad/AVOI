@@ -46,15 +46,25 @@ function App() {
         <Route element={<PrivateRoute allowedRoles={ROLES.allUsers}/>}>
           <Route path={NOTICE} element={<Notice />} />
         </Route>
-        <Route path={SHIFT} element={<Shift />} />
-        <Route path={ATTENDANCE} element={<Attendance />} />
         <Route path={EVENTS}>
           <Route index element={<Events />} />
           <Route path={":id"} element={<EventId />} />
         </Route>
         <Route path={SEARCH} element={<Search />} />
+        <Route element={<PrivateRoute allowedRoles={[ROLES.SuperAdmin, ROLES.Admin]}/>
+        }
+        >
+        <Route path={SHIFT} element={<Shift />} />
+        
+
+        </Route>
+        <Route element={<PrivateRoute allowedRoles={[ROLES.SuperAdmin]}/>
+        }
+        >
         <Route path={MANAGE} element={<ManageUsers />} />
         <Route path={MANAGE_EVENTS} element={<ManageEvents />} />
+
+        </Route>
       </Route>
     </Routes>
   );

@@ -6,7 +6,7 @@ export default function HomeView() {
     <>
       <div className="d-flex justify-content-center">
         <section className="container-sm row justify-content-center">
-        <div className="col-12 col-md-4 me-5">
+        <div className="col-12 col-md-4  text-center">
           <h2 className="mb-5">¿Qué hacemos?</h2>
           <span className="">
             Nuestro objetivo en AVOI es que nunca quede ningún niño y niña sin
@@ -16,15 +16,15 @@ export default function HomeView() {
             posible.
           </span>
         </div>
-        <div className="col-12 col-md-4 ms-5">
+        <div className="col-12 col-md-4 ms-5 mx-5">
           <img src="./avoiPlanta.png" className="img-fluid w-100"></img>
         </div>
 
         </section>
       </div>
-      <p className="text-center fs-2 mt-5">
-        ¡Echa un vistazo a las fotos de nuestros últimos eventos!
-      </p>
+          <p className="text-center fs-2 mt-5">
+            ¡Echa un vistazo a las fotos de nuestros últimos eventos!
+          </p>
       <div className="m-4">
         <Carousel className="" />
       </div>

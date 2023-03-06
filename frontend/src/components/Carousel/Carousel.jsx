@@ -2,6 +2,11 @@ import "./carousel.css";
 export default function Carousel() {
   return (
     <>
+    <div className="container">
+    <div className="row">
+
+    <div className="col">
+
       <div
         id="carouselExampleAutoplaying"
         className="carousel slide"
@@ -12,7 +17,7 @@ export default function Carousel() {
               <p className="centrado text-encima">Oncofutbol</p>
             <img
               src="/oncofutbol.png"
-              className="d-block w-100"
+              className="d-block w-100 img-responsive"
               alt="..."
             />
           </div>
@@ -58,6 +63,9 @@ export default function Carousel() {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
+    </div>
+    </div>
+    </div>
     </>
   );
 }
