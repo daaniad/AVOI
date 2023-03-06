@@ -239,7 +239,7 @@ userQueries.fetchAdmin = async (id) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "SELECT * FROM usuarios WHERE id = (SELECT responsable FROM dias JOIN disponibilidad on dias.id = disponibilidad.idSemana JOIN usuarios on disponibilidad.idusuario = usuarios.id  WHERE usuarios.id = ? limit 1)",
+      "SELECT * FROM usuarios WHERE id = (SELECT responsable FROM dias JOIN disponibilidad on dias.id = disponibilidad.idSemana JOIN usuarios on disponibilidad.id = usuarios.idturno  WHERE usuarios.id = ? )",
       id,
       "select",
       conn

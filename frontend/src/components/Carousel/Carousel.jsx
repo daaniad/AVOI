@@ -17,7 +17,7 @@ export default function Carousel() {
               <p className="centrado text-encima">Oncofutbol</p>
             <img
               src="/oncofutbol.png"
-              className="d-block w-100 img-responsive"
+              className="image-carousel d-block w-100 img-responsive"
               alt="..."
             />
           </div>
@@ -25,7 +25,7 @@ export default function Carousel() {
           <p className="centrado text-encima">Feria AVOI</p>
             <img
               src="/avoiFeria.png"
-              className="d-block w-100"
+              className="image-carousel d-block w-100"
               alt="..."
             />
           </div>
@@ -33,7 +33,7 @@ export default function Carousel() {
           <p className="centrado text-center text-encima">El Camino</p>
             <img
               src="/avoiCamino.png"
-              className="d-block w-100"
+              className="image-carousel d-block w-100"
               alt="..."
             />
           </div>

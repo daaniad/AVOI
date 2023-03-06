@@ -22,7 +22,7 @@ export default function NoticeView() {
 
   return (
     <>
-      <div className="mt-3 text-center justify-content-center">
+      <div className="container mt-3 text-center justify-content-center">
         <h2>
           Avisa a tu responsable si no puedes acudir a tu turno. Recuerda
           nuestro lema: ¡Ningún niño sin jugar!
@@ -32,7 +32,7 @@ export default function NoticeView() {
         
             {response?.map((user) => (
               <div key={user.id}>
-              <div className="mb-5 mt-5 d-flex text-center justify-content-center">
+              <div className="mb-5 mt-5 d-flex text-center container justify-content-center">
                   <h2 className="">
                     ¡Hola,{" "}
                     {authorization.nombre.replace(/^\w/, (c) =>

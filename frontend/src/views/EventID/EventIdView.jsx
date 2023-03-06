@@ -69,27 +69,30 @@ export default function EventIdView() {
       {event && !toggle && (
         <>
           <div
-            className="card card-event"
-            style={{ width: "18rem" }}
+            className=" container mt-5 d-flex justify-content-center"
+            
             key={event.id}
           >
+            <div className="">
+
             <img
               src={`http://127.0.0.1:3000/${event.imagen}`}
-              className="card-img-top mw-100"
+              className="img-fluid event-image"
               alt="..."
             />
-            <div className="card-body">
+            </div>
+            {/* <div className="card-body">
               <h5 className="card-title">{event.titulo}</h5>
               <p className="card-text">{event.descripcion}</p>
               <p className="card-text">{event.fecha.split("T")[0]}</p>
-            </div>
-            {authorization.role === 2 && (
+            </div> */}
+            {/* {authorization.role === 2 && (
               <div className="d-flex justify-content-center">
                 <button className="btn btn-success" onClick={handleToggleTrue}>
                   Editar
                 </button>
               </div>
-            )}
+            )} */}
           </div>
         </>
       )}

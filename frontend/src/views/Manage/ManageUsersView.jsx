@@ -37,6 +37,9 @@ export default function ManageUsersView({ response, onSubmit }) {
 
   return (
     <>
+    <div className="d-flex justify-content-center mb-5 text-center">
+        <h1>Validación</h1>
+      </div>
       <div className="d-flex justify-content-center text-center">
         <h1>Estos son los usuarios que faltan por validar</h1>
       </div>

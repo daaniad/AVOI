@@ -1,3 +1,7 @@
 .card-event {
     border-radius: 32px;
 }
+.event-image {
+    width: 900px;
+    border-radius: 32px;
+}
