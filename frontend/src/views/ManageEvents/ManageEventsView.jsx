@@ -1,10 +1,11 @@
 import { useState } from "react";
-
+import "./manageEvents.css"
+import Swal from "sweetalert2"
 export default function ManageEventsView() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(null);
 
   function handleInput(e) {
     e.preventDefault();
@@ -20,44 +21,63 @@ export default function ManageEventsView() {
       body: formData,
     }).then((response) => {
       if (response.status === 200) {
-        alert("Event added successfully");
+        Swal.fire(
+          `¡Evento introducido correctamente!`,
+          "",
+          'success');
+          setTitle("")
+          setDescription("")
+          setDate("")
+          setFile(null)
       }
     });
   }
   return (
     <>
-      <h1>Esto es Manage Events</h1>
-      <form method="post" encType="multipart/form-data" onSubmit={handleInput}>
+    <div className="d-flex justify-content-center text-center">
+      
+      <h1>Introduce los detalles del evento aquí</h1>
+    </div>
+    <div className="container">
+    <div className="d-flex justify-content-center">
+
+      <form className="d-flex flex-column grid event-card gap-3 form-group m-3" method="post" encType="multipart/form-data" onSubmit={handleInput}>
         <input
+          className="form-control rounded-pill text-center"
           type="text"
           name="titulo"
-          placeholder="title"
+          placeholder="Título"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <input
+          className="form-control rounded-pill text-center"
           type="text"
           name="descripcion"
           required
-          placeholder="description"
+          placeholder="Descripción"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <input
+          className="form-control rounded-pill text-center"
           type="date"
           name="fecha"
-          placeholder="date"
+          placeholder=""
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
         <input
+          className="form-control rounded-pill text-center"
           type="file"
           name="imagen"
           value={undefined}
           onChange={(e) => setFile(e.target.files[0])}
         />
-        <button type="submit">Add Event</button>
+        <button className="btn rounded-pill btn-success" type="submit">Añadir evento</button>
       </form>
+    </div>
+    </div>
       
     </>
   );
