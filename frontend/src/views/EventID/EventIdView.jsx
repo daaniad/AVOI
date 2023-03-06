@@ -56,7 +56,10 @@ export default function EventIdView() {
 
   return (
     <>
-      <h1>Bienvenido al evento {event.titulo}</h1>
+    <div className="text-center">
+
+      <h1>Bienvenido al evento {event?.titulo}</h1>
+    </div>
 
       {event && !toggle && (
         <>
