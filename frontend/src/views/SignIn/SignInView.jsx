@@ -175,7 +175,7 @@ export default function SignInView() {
                   </div>
                   <div className="ms-4">
 
-                  <button className="btn btn-danger" onClick={(e) => handleDeleteField(e, index)}>
+                  <button className="btn btn-danger" type="button" onClick={(e) => handleDeleteField(e, index)}>
                     X
                   </button>
                   </div>
