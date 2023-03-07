@@ -69,11 +69,11 @@ export default function EventIdView() {
       {event && !toggle && (
         <>
           <div
-            className=" container mt-5 d-flex justify-content-center"
+            className=" container mt-5 flex-column "
             
             key={event.id}
           >
-            <div className="">
+            <div className="d-flex justify-content-center">
 
             <img
               src={`http://127.0.0.1:3000/${event.imagen}`}
@@ -81,32 +81,53 @@ export default function EventIdView() {
               alt="..."
             />
             </div>
-            {/* <div className="card-body">
-              <h5 className="card-title">{event.titulo}</h5>
-              <p className="card-text">{event.descripcion}</p>
-              <p className="card-text">{event.fecha.split("T")[0]}</p>
-            </div> */}
-            {/* {authorization.role === 2 && (
-              <div className="d-flex justify-content-center">
-                <button className="btn btn-success" onClick={handleToggleTrue}>
-                  Editar
-                </button>
-              </div>
-            )} */}
+              
           </div>
+
+          <div className="d-flex justify-content-center">
+        <section className="container-sm row justify-content-center">
+        <div className="col-12 col-md-4 event-card mt-4 text-center">
+          <h2 className="mb-3">{event.titulo}</h2>
+          <span className="">
+            {event.descripcion}
+          </span>
+          <h4 className="mt-3">
+            {event.fecha}
+          </h4>
+            {authorization.role === 2 && (
+              <div className="d-flex justify-content-center">
+              <button className="btn btn-success" onClick={handleToggleTrue}>
+              Editar
+              </button>
+              </div>
+              )}
+        </div>
+
+
+        </section>
+      </div>
         </>
       )}
 
       {event && toggle && (
         <>
-          <div className="card" style={{ width: "18rem" }} key={event.id}>
+            <div
+            className=" container mt-5 flex-column "
+            
+            key={event.id}
+          >
+            <div className="d-flex justify-content-center">
+
             <img
               src={`http://127.0.0.1:3000/${event.imagen}`}
-              className="card-img-top"
+              className="img-fluid event-image"
               alt="..."
             />
-            <div className="card-body">
-              <form className="form-group" onSubmit={(e) => updateEvent(e)}>
+            </div>
+              
+          </div>
+            <div className="d-flex justify-content-center mt-4">
+              <form className="form-group event-card" onSubmit={(e) => updateEvent(e)}>
                 <input
                   className="form-control card-title"
                   name="titulo"
@@ -123,7 +144,7 @@ export default function EventIdView() {
                 ></input>
                 <input
                   type="date"
-                  className="card-text form-control mt-4"
+                  className="card-text text-center form-control mt-4"
                   name="fecha"
                   onChange={handleUpdate}
                   value={updatedEvent.fecha}
@@ -135,7 +156,6 @@ export default function EventIdView() {
                 </div>
               </form>
             </div>
-          </div>
         </>
       )}
     </>
