@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./manage.css";
+import Swal from "sweetalert2";
 const dayWeek = {
   1: "Lunes",
   2: "Lunes",
@@ -27,6 +28,7 @@ export default function ManageUsersView({ response, onSubmit }) {
 
   function handleSelect(event) {
     setValidateDisp(event.target.value);
+   
   }
 
   function handleToggle(e, user) {

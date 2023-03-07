@@ -1,5 +1,6 @@
 import ManageUsersView from "./ManageUsersView";
 import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 
 export default function ManageUsers() {
   const [users, setUsers] = useState([]);
@@ -25,6 +26,10 @@ export default function ManageUsers() {
     );
     const newUserList = await response.json();
     setUsers(newUserList);
+    Swal.fire(
+      `Usuario validado`,
+      '¡Gracias por registrarte!',
+      'success');
   }
 
   return <ManageUsersView response={users} onSubmit={fetchData} />;
