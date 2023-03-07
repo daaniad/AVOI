@@ -1,5 +1,7 @@
 import { useState, useRef } from "react";
 import { initialUserState } from "../../const/homeMenu/initialUserState";
+
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2"
 
 const dayWeek = {
@@ -21,6 +23,7 @@ export default function SignInView() {
   const [newUser, setNewUser] = useState(initialUserState);
   const [formValues, setFormValues] = useState([]);
   const [toggle, setToggle] = useState(false);
+  const navigate = useNavigate();
 
   const dayRef = useRef();
   const hourRef = useRef();
@@ -37,6 +40,7 @@ export default function SignInView() {
     setFormValues(values);
     setToggle(false);
   }
+  
 
   function handleDeleteField(e, index) {
     const values = [...formValues];
@@ -49,7 +53,7 @@ export default function SignInView() {
     setToggle(true);
   }
 
-  async function signIn(e) {
+  function signIn(e) {
     e.preventDefault();
     const user = {
       ...newUser,
@@ -70,6 +74,7 @@ export default function SignInView() {
           '¡Gracias por registrarte!',
           'success');
         setNewUser(initialUserState);
+        navigate("/")
       } else if (response.status === 409) {
         Swal.fire(
           `Usuario con email ${newUser.email} ya registrado`,

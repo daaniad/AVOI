@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import {
-  ATTENDANCE,
   EVENTS,
   HOME,
   ID,
@@ -14,7 +13,6 @@ import {
   SHITF_LABEL,
   SIGNIN,
 } from "./const/homeMenu/homeMenu";
-import Attendance from "./views/Attendance";
 import EventId from "./views/EventID";
 import Events from "./views/Events";
 import Home from "./views/Home/Home";

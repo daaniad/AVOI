@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 import {MY_AUTH_APP} from '../../const/localStorageKey';
+import { useNavigate } from "react-router-dom";
 
 const CheckLogInContext = createContext({
   authorization: {
@@ -18,6 +19,7 @@ export default CheckLogInContext;
 
 
 export function LogInContextProvider({ children }) {
+  const navigate = useNavigate()
 
 
   const [authorization, setAuthorization] = useState(JSON.parse(
@@ -57,6 +59,7 @@ export function LogInContextProvider({ children }) {
       role: null,
       id: null
     });
+    navigate("/")
   }
 
   const value = {
