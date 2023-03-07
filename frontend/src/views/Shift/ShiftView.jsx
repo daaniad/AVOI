@@ -73,7 +73,7 @@ export default function ShiftView() {
               </h3>
               {user.fAsist === null ||
               fechaEnFormatoYYYYMMDD != user.fAsist.split("T")[0] ? (
-                <div className="align-items-center d-flex">
+                <div className="align-items-center justify-content-center d-flex">
                   <button
                     className="btn btn-primary"
                     name="idusuarios"

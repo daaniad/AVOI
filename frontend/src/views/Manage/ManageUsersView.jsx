@@ -50,7 +50,7 @@ export default function ManageUsersView({ response, onSubmit }) {
             <ol className="d-flex align-items-strech gap-3 text-center justify-content-center flex-row p-3">
               <div
                 key={user.id}
-                className="shift-card d-flex flex-column justify-content-center align-items-center p-5"
+                className="shift-card d-flex flex-column justify-content-center align-items-center p-5 tarjeta-min"
               >
                 <div className="shift-name">
 
@@ -103,7 +103,7 @@ export default function ManageUsersView({ response, onSubmit }) {
                       type="submit"
                       className="btn btn-success d-flex justify-content-center"
                     >
-                      Validate shift
+                      Validar turno
                     </button>
                   </div>
                   </fieldset>

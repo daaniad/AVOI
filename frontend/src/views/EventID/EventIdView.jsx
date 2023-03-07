@@ -128,6 +128,10 @@ export default function EventIdView() {
           </div>
             <div className="d-flex justify-content-center mt-4">
               <form className="form-group event-card" onSubmit={(e) => updateEvent(e)}>
+                <div className="d-flex justify-content-center text-center mb-3">
+                <h5>Título</h5>
+
+                </div>
                 <input
                   className="form-control card-title"
                   name="titulo"
@@ -135,13 +139,20 @@ export default function EventIdView() {
                   value={updatedEvent.titulo}
                   onChange={handleUpdate}
                 ></input>
+                <div className="d-flex justify-content-center text-center mt-3">
 
+                <h5>Descripción</h5>
+                </div>
                 <input
                   className="card-text form-control mt-4"
                   name="descripcion"
                   onChange={handleUpdate}
                   value={updatedEvent.descripcion}
-                ></input>
+                  ></input>
+                  <div className="d-flex justify-content-center text-center mt-3">
+
+                  <h5>Fecha</h5>
+                  </div>
                 <input
                   type="date"
                   className="card-text text-center form-control mt-4"

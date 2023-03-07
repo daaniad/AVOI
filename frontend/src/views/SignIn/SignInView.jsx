@@ -74,7 +74,7 @@ export default function SignInView() {
           '¡Gracias por registrarte!',
           'success');
         setNewUser(initialUserState);
-        navigate("/")
+        navigate("/login")
       } else if (response.status === 409) {
         Swal.fire(
           `Usuario con email ${newUser.email} ya registrado`,
