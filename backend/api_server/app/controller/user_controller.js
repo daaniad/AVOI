@@ -101,6 +101,9 @@ controller.getShiftList = async (req, res) => {
 
 controller.saveAssistance = async (req, res) => {
   try {
+    // dao de get assistance by userID
+    // si devuelve datos, hacer update
+    // si no, hacer assistance con insert
     const assistance = await dao.saveAssistance(req.body);
     if (assistance) {
       return res.send(await dao.getUserByShift(req.body.idresponsable));

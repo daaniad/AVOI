@@ -63,7 +63,7 @@ controller.updateEvent = async (req, res) => {
     await dao.updateEvent(req.params.id, req.body);
     const event = await dao.getEventById(req.params.id)
 
-    return res.send(event);
+    return res.send(event[0]);
   } catch (e) {
     console.log(e.message);
     return res.status(400).send(e.message);

@@ -233,6 +233,27 @@ userQueries.saveAssistance = async (assistData) => {
     conn && (await conn.end());
   }
 };
+userQueries.updateAssistance = async (assistData) => {
+  let conn = null;
+
+  let assistObj = {
+    idusuarios: assistData.idusuarios,
+    fAsist: moment().format("YYYY-MM-DD HH:mm:ss"),
+  };
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "INSERT INTO asistencia SET ?",
+      assistObj,
+      "insert",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
 
 userQueries.fetchAdmin = async (id) => {
   let conn = null;
