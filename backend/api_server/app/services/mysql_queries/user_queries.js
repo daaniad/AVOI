@@ -243,8 +243,29 @@ userQueries.updateAssistance = async (assistData) => {
   try {
     conn = await db.createConnection();
     return await db.query(
-      "INSERT INTO asistencia SET ?",
-      assistObj,
+      "UPDATE asistencia SET ? WHERE idusuarios = ?",
+      assistObj.fAsist, assistObj.idusuarios,
+      "insert",
+      conn
+    );
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    conn && (await conn.end());
+  }
+};
+userQueries.getAssistanceByUserId = async (assistData) => {
+  let conn = null;
+
+  let assistObj = {
+    idusuarios: assistData.idusuarios,
+    fAsist: moment().format("YYYY-MM-DD HH:mm:ss"),
+  };
+  try {
+    conn = await db.createConnection();
+    return await db.query(
+      "SELECT * FROM asistencia WHERE idusuarios = ?",
+      assistObj.idusuarios,
       "insert",
       conn
     );

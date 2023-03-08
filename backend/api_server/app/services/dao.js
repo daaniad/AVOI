@@ -44,6 +44,10 @@ dao.getUserByShift = async (id) => await userQueries.usersByShift(id);
 
 dao.saveAssistance = async (assistData) => await userQueries.saveAssistance(assistData);
 
+dao.updateAssistance = async (assistData) => await userQueries.updateAssistance(assistData);
+
+dao.getAssistanceByUserId = async (assistData) => await userQueries.getAssistanceByUserId(assistData);
+
 dao.fetchAdmin = async(id) => await userQueries.fetchAdmin(id);
 
 dao.getUserById = async (id) => await userQueries.getUserById(id);
