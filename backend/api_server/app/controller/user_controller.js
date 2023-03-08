@@ -1,7 +1,7 @@
 import { SignJWT, jwtVerify } from "jose";
 import md5 from "md5";
 import dao from "../services/dao.js";
-import {transporter} from "../config/nodemailer.js"
+import { transporter } from "../config/nodemailer.js";
 
 const controller = {};
 
@@ -17,9 +17,8 @@ controller.addUser = async (req, res) => {
       return res.status(409).send(`User ${name} already registered`);
     const addUser = await dao.addUser(req.body);
 
-    
     availability.map(async function (turn) {
-     const idsemana = await dao.alterDay(turn.day, Number(turn.hour));
+      const idsemana = await dao.alterDay(turn.day, Number(turn.hour));
       await dao.addDisp({
         diasSemana: Number(idsemana[0].id),
         mañana: Number(turn.hour),
@@ -79,7 +78,6 @@ controller.validate = async (req, res) => {
     if (Object.entries(req.body).length === 0)
       return res.status(400).send("Body error");
     await dao.validate(req.params.id, req.body);
-    
 
     return res.send(await dao.getUserToValidateAndShifts());
   } catch (e) {
@@ -101,25 +99,15 @@ controller.getShiftList = async (req, res) => {
 
 controller.saveAssistance = async (req, res) => {
   try {
-    // dao de get assistance by userID
-    const getAssistanceByUserId = await dao.getAssistanceByUserId(req.body)
-    // si devuelve datos, hacer update
-    const updateAssistance = await dao.updateAssistance(req.body)
-    // si no, hacer assistance con insert
-    const assistance = await dao.saveAssistance(req.body);
-    
-    if (getAssistanceByUserId) {
-      
-      return res.send(updateAssistance)
+    const { idresponsable, idusuarios } = req.body;
+    const getAssistanceByUserId = await dao.getAssistanceByUserId(idusuarios);
+    if (getAssistanceByUserId.length > 0) {
+      await dao.updateAssistance(idusuarios);
+    } else {
+      await dao.saveAssistance(idusuarios);
     }
-
-    else {
-      if (assistance) {
-        return res.send(await dao.getUserByShift(req.body.idresponsable));
-      }
-      return res.send(assistance)
-      
-    }
+    const users = await dao.getUserByShift(idresponsable);
+    res.send(users);
   } catch (e) {
     console.log(e.message);
     res.status(400).send(e.message);
@@ -138,15 +126,15 @@ controller.fetchAdmin = async (req, res) => {
 };
 
 controller.fetchUsersByName = async (req, res) => {
-  const {nombre} = req.params;
+  const { nombre } = req.params;
   try {
     const user = await dao.fetchUsersByName(nombre);
     return res.send(user);
-  } catch(e) {
+  } catch (e) {
     console.log(e.message);
-    res.status(400).send(e.message)
+    res.status(400).send(e.message);
   }
-}
+};
 
 controller.getUsers = async (req, res) => {
   try {
@@ -159,29 +147,22 @@ controller.getUsers = async (req, res) => {
 
 controller.mailToAdmin = async (req, res) => {
   try {
-    const user = await dao.getUserById(req.params.id)
-    const admin = await dao.fetchAdmin(req.params.id)
-    
-        await transporter.sendMail({
-          from: ` ${user[0].nombre.replace(/^\w/, (c) =>
-          c.toUpperCase()
-        )}`, // sender address
-          to: `<avoipepe@gmail.com>`,
-          subject: "No asistencia", // Subject line
-          // text: "Hello world?", // plain text body
-          html: `${user[0].nombre.replace(/^\w/, (c) =>
-          c.toUpperCase()
-        )} no podrá ir a su turno correspondiente`, // html body
-        });
-      return res.send({user,admin})
-       
-    ;
-        
-      
-    
-  }catch(e) {
+    const user = await dao.getUserById(req.params.id);
+    const admin = await dao.fetchAdmin(req.params.id);
+
+    await transporter.sendMail({
+      from: ` ${user[0].nombre.replace(/^\w/, (c) => c.toUpperCase())}`, // sender address
+      to: `<avoipepe@gmail.com>`,
+      subject: "No asistencia", // Subject line
+      // text: "Hello world?", // plain text body
+      html: `${user[0].nombre.replace(/^\w/, (c) =>
+        c.toUpperCase()
+      )} no podrá ir a su turno correspondiente`, // html body
+    });
+    return res.send({ user, admin });
+  } catch (e) {
     console.log(e.message);
   }
-}
+};
 
 export default controller;

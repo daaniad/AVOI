@@ -212,11 +212,11 @@ userQueries.getUsers = async () => {
   }
 };
 
-userQueries.saveAssistance = async (assistData) => {
+userQueries.saveAssistance = async (idusuarios) => {
   let conn = null;
 
   let assistObj = {
-    idusuarios: assistData.idusuarios,
+    idusuarios: idusuarios,
     fAsist: moment().format("YYYY-MM-DD HH:mm:ss"),
   };
   try {
@@ -233,19 +233,19 @@ userQueries.saveAssistance = async (assistData) => {
     conn && (await conn.end());
   }
 };
-userQueries.updateAssistance = async (assistData) => {
+userQueries.updateAssistance = async (idusuario) => {
   let conn = null;
 
   let assistObj = {
-    idusuarios: assistData.idusuarios,
+    idusuarios:idusuario,
     fAsist: moment().format("YYYY-MM-DD HH:mm:ss"),
   };
   try {
     conn = await db.createConnection();
     return await db.query(
       "UPDATE asistencia SET ? WHERE idusuarios = ?",
-      assistObj.fAsist, assistObj.idusuarios,
-      "insert",
+     [ assistObj.fAsist, assistObj.idusuarios],
+      "update",
       conn
     );
   } catch (e) {
@@ -254,19 +254,14 @@ userQueries.updateAssistance = async (assistData) => {
     conn && (await conn.end());
   }
 };
-userQueries.getAssistanceByUserId = async (assistData) => {
+userQueries.getAssistanceByUserId = async (idusuario) => {
   let conn = null;
-
-  let assistObj = {
-    idusuarios: assistData.idusuarios,
-    fAsist: moment().format("YYYY-MM-DD HH:mm:ss"),
-  };
   try {
     conn = await db.createConnection();
     return await db.query(
       "SELECT * FROM asistencia WHERE idusuarios = ?",
-      assistObj.idusuarios,
-      "insert",
+      idusuario,
+      "select",
       conn
     );
   } catch (e) {
