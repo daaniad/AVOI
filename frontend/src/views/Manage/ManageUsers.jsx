@@ -28,7 +28,7 @@ export default function ManageUsers() {
     setUsers(newUserList);
     Swal.fire(
       `Usuario validado`,
-      '¡Gracias por registrarte!',
+      '',
       'success');
   }
 
